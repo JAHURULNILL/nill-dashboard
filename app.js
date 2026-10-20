@@ -273,7 +273,7 @@ function drawSearch(q) {
 }
 
 /* data */
-let DATA = { jobs: null, quotes: null, quiz: null, facts: null, growth: null, news: null };
+let DATA = { jobs: null, quotes: null, quiz: null, facts: null, growth: null, news: null, inspiration: null };
 let todayQuotes = [], todayFacts = [], todayTips = [];
 async function getJSON(url) {
   try { const r = await fetch(url); if (!r.ok) throw 0; return await r.json(); }
@@ -286,31 +286,44 @@ function splitRoutineItem(x) {
   if (i < 0) return { time: "", text: x };
   return { time: x.slice(0, i).trim(), text: x.slice(i + 3).trim() };
 }
-const HERO_CHECK = `<span class="box"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 5"/></svg></span>`;
-function updateArc() {
-  const boxes = $$("#heroTasks input");
-  if (!boxes.length) return;
-  const n = boxes.filter(b => b.checked).length;
-  const fg = $("#arcFg");
-  if (fg) fg.style.strokeDashoffset = (248.2 * (1 - n / boxes.length)).toFixed(1);
-  const an = $("#arcN");
-  if (an) an.textContent = bn(n) + "/" + bn(boxes.length);
+/* hero inspiration — প্রতিবার লোডে নতুন আয়াত / প্রেরণার লাইন */
+const INSPO_FALLBACK = [
+  { type: "ayat", ar: "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًا", bn: "নিশ্চয় কষ্টের সাথে স্বস্তি রয়েছে।", ref: "সূরা আশ-শারহ · ৯৪:৬" },
+  { type: "line", bn: "তুমি যতবার পড়ে গেছ, তার চেয়ে একবার বেশি উঠে দাঁড়িয়েছ — এই হিসাবটাই তোমার আসল পরিচয়।" },
+  { type: "line", bn: "মানুষ হারে তখনই, যখন সে চেষ্টা করা ছেড়ে দেয়। তুমি এখনো মাঠে আছ — মানে তুমি হারোনি।" },
+];
+let inspoIdx = -1;
+function inspoPool() {
+  const pool = [];
+  if (DATA.inspiration) {
+    (DATA.inspiration.ayat || []).forEach(a => pool.push({ type: "ayat", ar: a.ar, bn: a.bn, ref: a.ref }));
+    (DATA.inspiration.lines || []).forEach(t => pool.push({ type: "line", bn: t }));
+  }
+  return pool.length ? pool : INSPO_FALLBACK;
 }
-function renderHeroTasks() {
-  const el = $("#heroTasks");
-  if (!el || !DATA.growth) return;
-  const r = DATA.growth.routine;
-  const picks = [];
-  ["সকাল", "দুপুর", "রাত"].forEach(k => {
-    if (r[k] && r[k].length) {
-      const { time, text } = splitRoutineItem(r[k][0]);
-      picks.push({ time: time.replace(k, "").trim() || time, text });
-    }
-  });
-  el.innerHTML = picks.map(p => `
-<label class="check"><input type="checkbox">${HERO_CHECK}<span class="txt">${esc(p.text)}<small>${esc(p.time)}</small></span></label>`).join("");
-  el.querySelectorAll("input").forEach(i => i.addEventListener("change", updateArc));
-  updateArc();
+function showInspo(animate) {
+  const el = $("#heroInspo");
+  if (!el) return;
+  const pool = inspoPool();
+  let last = -1;
+  try { const v = parseInt(localStorage.getItem("nill_inspo_last"), 10); if (!isNaN(v)) last = v; } catch {}
+  const banned = new Set([last, inspoIdx]);
+  let cand = pool.map((_, i) => i).filter(i => !banned.has(i));
+  if (!cand.length) cand = pool.map((_, i) => i);
+  inspoIdx = cand[Math.floor(Math.random() * cand.length)];
+  try { localStorage.setItem("nill_inspo_last", String(inspoIdx)); } catch {}
+  const it = pool[inspoIdx];
+  el.innerHTML = (it.type === "ayat" ? `
+<span class="inspo-chip">কুরআনের আয়াত</span>
+<p class="inspo-ar" dir="rtl" lang="ar">${esc(it.ar)}</p>
+<p class="inspo-bn">${esc(it.bn)}</p>
+<p class="inspo-ref">${esc(it.ref)}</p>` : `
+<span class="inspo-chip">আজকের প্রেরণা</span>
+<p class="inspo-bn big">${esc(it.bn)}</p>`) + `
+<div class="inspo-foot"><button class="inspo-btn" id="inspoNext" type="button">আরেকটি দেখাও ↻</button></div>`;
+  const btn = $("#inspoNext");
+  if (btn) btn.addEventListener("click", () => showInspo(true));
+  if (animate) { el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade"); }
 }
 function last7Counts() {
   const counts = new Array(7).fill(0);
@@ -925,11 +938,13 @@ ${p.body ? `<p class="p-body">${esc(p.body)}</p>` : ""}
   wireTimer();
   renderDayProgress();
   setInterval(renderDayProgress, 60000);
-  const [jobs, quotes, quiz, facts, growth, news] = await Promise.all([
+  const [jobs, quotes, quiz, facts, growth, news, inspiration] = await Promise.all([
     getJSON("data/jobs.json"), getJSON("data/quotes.json"), getJSON("data/quiz.json"),
     getJSON("data/facts.json"), getJSON("data/growth.json"), getJSON("data/news.json"),
+    getJSON("data/inspiration.json"),
   ]);
-  DATA = { jobs, quotes, quiz, facts, growth, news };
+  DATA = { jobs, quotes, quiz, facts, growth, news, inspiration };
+  showInspo(false);
   if (!jobs || !quotes || !quiz || !facts || !growth) {
     $("main").insertAdjacentHTML("afterbegin",
       `<div class="err-box">কিছু তথ্য লোড হয়নি — ইন্টারনেট সংযোগ দেখে পেজটি রিফ্রেশ করো।</div>`);
@@ -938,7 +953,7 @@ ${p.body ? `<p class="p-body">${esc(p.body)}</p>` : ""}
   if (quiz) renderLearn();
   if (quotes) renderQuotes();
   if (facts) renderFacts();
-  if (growth) { renderGrowth(); renderRoutine($("#routineHome"), growth.routine); renderHeroTasks(); }
+  if (growth) { renderGrowth(); renderRoutine($("#routineHome"), growth.routine); }
   renderNews();
   buildNav();
   buildSearchIndex();

@@ -62,27 +62,22 @@ main{padding:30px clamp(18px,3.4vw,48px) 60px;max-width:1180px;width:100%;min-wi
 .grid12{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
 .s4{grid-column:span 4}.s5{grid-column:span 5}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
 
-/* checklist */
-.check{position:relative;display:flex;align-items:flex-start;gap:12px;padding:10px 0;cursor:pointer;user-select:none}
-.check input{position:absolute;opacity:0;pointer-events:none}
-.box{width:24px;height:24px;border-radius:8px;border:2px solid #B9BFDA;display:grid;place-items:center;flex:none;margin-top:1px;transition:all .15s;background:#fff}
-.box svg{width:14px;height:14px;stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(.4);transition:all .15s}
-.check input:checked+.box{background:var(--mint);border-color:var(--mint)}
-.check input:checked+.box svg{opacity:1;transform:none}
-.check input:checked~.txt{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(26,32,64,.3)}
-.check input:focus-visible+.box{outline:3px solid var(--indigo);outline-offset:2px}
-.txt small{display:block;color:var(--muted);font-size:13.5px}
-
 /* ---------- home ---------- */
-.hero{display:grid;grid-template-columns:1fr 190px;gap:18px;align-items:center;min-height:100%}
-.hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(30px,4vw,46px);line-height:1.15;letter-spacing:-.5px}
-.hero .date{color:#7A5A12;font-weight:500;margin:6px 0 14px}
-.arc{position:relative;width:190px;height:118px;justify-self:center}
-.arc svg{width:100%;height:100%}
-.arc .bg{stroke:rgba(26,32,64,.12)} .arc .fg{stroke:var(--indigo);transition:stroke-dashoffset .5s ease}
-.arc-n{position:absolute;inset:auto 0 4px;text-align:center;line-height:1.1}
-.arc-n b{font-family:var(--serif);font-size:30px;font-weight:800;display:block}
-.arc-n span{font-size:13px;color:#7A5A12}
+.hero{display:flex;flex-direction:column;min-height:100%}
+.hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(24px,2.6vw,27px);line-height:1.25;letter-spacing:-.3px}
+.hero .date{color:#7A5A12;font-weight:500;margin:4px 0 0}
+/* hero inspiration — প্রতিবার নতুন আয়াত / প্রেরণার লাইন */
+.hero-inspo{border-top:1px solid rgba(184,118,10,.22);margin-top:14px;padding-top:16px}
+.hero-inspo.fade{animation:inspoFade .25s ease}
+@keyframes inspoFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.inspo-chip{display:inline-block;background:rgba(255,255,255,.6);color:#7A5A12;font-size:12.5px;font-weight:700;letter-spacing:.02em;padding:3px 11px;border-radius:999px;margin-bottom:10px}
+.inspo-ar{font-family:"Noto Naskh Arabic","Traditional Arabic",serif;font-size:clamp(23px,3.2vw,27px);line-height:1.95;color:var(--ink);margin-bottom:10px}
+.inspo-bn{font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.9;color:var(--ink)}
+.inspo-bn.big{font-size:21px}
+.inspo-ref{font-size:13.5px;color:#7A5A12;margin-top:8px}
+.inspo-foot{display:flex;justify-content:flex-end;margin-top:14px}
+.inspo-btn{background:rgba(255,255,255,.65);border:1px solid rgba(184,118,10,.35);color:#7A5A12;font-weight:600;font-size:13.5px;padding:7px 15px;border-radius:999px;transition:background .15s,border-color .15s}
+.inspo-btn:hover{background:#fff;border-color:var(--gold-d)}
 .streak{display:flex;flex-direction:column;gap:14px;height:100%}
 .streak .big{display:flex;align-items:center;gap:10px}
 .streak .big .ico{width:42px;height:42px;stroke:var(--rose-d);fill:var(--rose);fill-opacity:.25}
@@ -213,7 +208,6 @@ main{padding:30px clamp(18px,3.4vw,48px) 60px;max-width:1180px;width:100%;min-wi
 .slot-h{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:800;font-size:19px;margin-bottom:6px}
 .slot-h span{font-family:var(--sans);font-weight:500;font-size:14px;color:var(--muted)}
 .slot .card{padding:6px 20px}
-.slot .check+.check{border-top:1px solid var(--line)}
 .score{position:sticky;top:24px;display:flex;flex-direction:column;gap:14px}
 .ring{width:150px;height:150px;margin:0 auto;position:relative}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
@@ -252,8 +246,6 @@ main{padding:30px clamp(18px,3.4vw,48px) 60px;max-width:1180px;width:100%;min-wi
 }
 @media (max-width:640px){
   .s4,.s5,.s7,.s8{grid-column:span 12}
-  .hero{grid-template-columns:1fr}
-  .arc{order:-1;justify-self:start}
   .facts{grid-template-columns:1fr}
   .books{gap:16px;padding:14px 12px 0}
   .funnel{grid-template-columns:repeat(2,1fr)}
