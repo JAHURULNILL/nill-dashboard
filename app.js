@@ -879,13 +879,21 @@ async function refreshNews() {
   }
 }
 const NEWS_DOTS = { bangladesh: "var(--indigo)", world: "var(--sky)", tech: "var(--mint)" };
+const AI_RE = /(\bAI\b|artificial intelligence|ChatGPT|OpenAI|Anthropic|Gemini|Copilot|machine learning|\bLLM\b|এআই|কৃত্রিম বুদ্ধিমত্তা)/i;
 function renderHomeNews() {
   const el = $("#homeNews");
   if (!el || !DATA.news) return;
-  const rows = ["bangladesh", "world", "tech"].map(k => {
-    const it = (DATA.news[k] || [])[0];
-    if (!it) return "";
-    return `<div class="news-li"><span class="dot" style="background:${NEWS_DOTS[k]}"></span><div><p><a href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.title)}</a></p><small>${NEWS_LABELS[k]} · ${esc(it.source)} · ${relTime(it.published)}</small></div></div>`;
+  const tech = DATA.news.tech || [];
+  const aiPick = tech.find(it => AI_RE.test(it.title + " " + (it.summary || ""))) || tech[0];
+  const slots = [
+    { k: "bangladesh", label: "দেশের বড় খবর", it: (DATA.news.bangladesh || [])[0] },
+    { k: "world", label: "বিশ্বের বড় খবর", it: (DATA.news.world || [])[0] },
+    { k: "tech", label: "AI-এর বড় খবর", it: aiPick },
+  ];
+  const rows = slots.map(s => {
+    if (!s.it) return "";
+    const title = s.it.title_bn || s.it.title;
+    return `<div class="news-li"><span class="dot" style="background:${NEWS_DOTS[s.k]}"></span><div><p><a href="${esc(s.it.link)}" target="_blank" rel="noopener">${esc(title)}</a></p><small>${s.label} · ${esc(s.it.source)} · ${relTime(s.it.published)}</small></div></div>`;
   }).join("");
   el.innerHTML = rows || `<p class="muted small">খবর এখনো আসেনি।</p>`;
 }

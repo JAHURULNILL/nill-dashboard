@@ -97,6 +97,31 @@ def fetch(url):
         return r.read()
 
 
+_bengali_re = re.compile("[\u0980-\u09fe]")
+
+
+def has_bengali(s):
+    return bool(_bengali_re.search(s or ""))
+
+
+def translate_bn(text):
+    """Machine-translate a headline to Bengali (Google Translate public
+    endpoint). Returns '' on any failure — caller keeps the original."""
+    if not text:
+        return ""
+    try:
+        from urllib.parse import quote
+        url = ("https://translate.googleapis.com/translate_a/single"
+               f"?client=gtx&sl=auto&tl=bn&dt=t&q={quote(text)}")
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=8) as r:
+            data = json.loads(r.read().decode("utf-8"))
+        out = "".join(seg[0] for seg in data[0] if seg and seg[0]).strip()
+        return out if has_bengali(out) else ""
+    except Exception:
+        return ""
+
+
 def parse_feed(data):
     """Return list of raw item dicts from RSS or Atom bytes."""
     root = ET.fromstring(data)
@@ -160,6 +185,11 @@ def main():
             top.append(it)
             if len(top) >= PER_CATEGORY:
                 break
+        for it in top:
+            if not has_bengali(it["title"]):
+                bn = translate_bn(it["title"])
+                if bn and bn != it["title"]:
+                    it["title_bn"] = bn
         result[cat] = top
         print(f"--> {cat}: {len(top)} items", file=sys.stderr)
     OUT.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
