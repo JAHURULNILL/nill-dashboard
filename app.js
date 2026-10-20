@@ -359,7 +359,7 @@ function renderHomeChips() {
   const jobs = DATA.jobs.jobs;
   const stCount = {};
   jobs.forEach(j => { const s = jobStatus(j); stCount[s] = (stCount[s] || 0) + 1; });
-  const progressed = (stCount.shortlisted || 0) + (stCount.interview || 0) + (stCount.offer || 0);
+  const progressed = (stCount.shortlisted || 0) + (stCount.interview || 0) + (stCount.interview_done || 0) + (stCount.offer || 0);
   const pct = jobs.length ? Math.round(progressed / jobs.length * 100) : 0;
   const ms = $("#jobMiniStats");
   if (ms) ms.innerHTML = `<div><b>${bn(jobs.length)}</b><span>আবেদন</span></div><div><b>${bn(stCount.interview || 0)}</b><span>ইন্টারভিউ</span></div>`;
@@ -390,11 +390,12 @@ ${routine[k].map(x => { const { time, text } = splitRoutineItem(x); return `<div
 /* jobs */
 const STATUSES = {
   applied: "আবেদন করা হয়েছে", shortlisted: "শর্টলিস্টেড", interview: "ইন্টারভিউ",
-  rejected: "বাতিল", offer: "অফার",
+  interview_done: "ইন্টারভিউ দেওয়া হয়েছে", rejected: "বাতিল", offer: "অফার",
 };
 let statusOv = load("nill_job_status", {});
 let jobFilter = "সব";
 let jobQuery = "";
+let sumFilter = "all";
 const jobKey = j => j.title + "|" + j.company + "|" + j.date;
 const jobStatus = j => statusOv[jobKey(j)] || j.status || "applied";
 const AV_COLORS = ["#4357E8", "#1BA383", "#D68A06", "#E2536F", "#2C97D3", "#7B4FD2"];
@@ -402,7 +403,7 @@ function renderJobs() {
   const { jobs, shortlist, counters } = DATA.jobs;
   const stCount = {};
   jobs.forEach(j => { const s = jobStatus(j); stCount[s] = (stCount[s] || 0) + 1; });
-  const progressed = (stCount.shortlisted || 0) + (stCount.interview || 0) + (stCount.offer || 0);
+  const progressed = (stCount.shortlisted || 0) + (stCount.interview || 0) + (stCount.interview_done || 0) + (stCount.offer || 0);
   const pipePct = jobs.length ? Math.round(progressed / jobs.length * 100) : 0;
   /* goal card — reference .goal */
   $("#goalBox").innerHTML = `
@@ -423,7 +424,7 @@ ${shortlist.map(s => `
 <div class="counter-item"><b>${bn(counters.nextjobz_oct)}টি</b><span>nextjobz (অক্টোবর)</span></div>
 <div class="counter-item"><b>${bn(counters.shomvob_applied)}টি</b><span>Shomvob-এ মোট</span></div>
 <div class="counter-item"><b>${bn(counters.bdjobs_quota)}</b><span>Bdjobs কোটা ব্যবহৃত</span></div>
-<div class="counter-item"><b>${bn(stCount.interview || 0)}টি</b><span>ইন্টারভিউ ধাপে</span></div>
+<div class="counter-item"><b>${bn((stCount.interview || 0) + (stCount.interview_done || 0))}টি</b><span>ইন্টারভিউ ধাপে</span></div>
 </div>`;
   /* channel bars */
   const byCh = {};
@@ -435,14 +436,22 @@ ${shortlist.map(s => `
 <div class="bar-row"><span>${esc(c)}</span>
 <div class="bar"><i style="width:${Math.round(byCh[c] / max * 100)}%;background:${chColors[c] || "var(--indigo)"}"></i></div>
 <b>${bn(byCh[c])}টি</b></div>`).join("");
-  /* funnel — real counts by effective status */
-  const fnStages = [
-    ["মোট আবেদন", jobs.length, "t-gold"], ["আবেদন করা", stCount.applied || 0, "t-indigo"],
-    ["শর্টলিস্ট", stCount.shortlisted || 0, "t-sky"], ["ইন্টারভিউ", stCount.interview || 0, "t-plum"],
-    ["অফার", stCount.offer || 0, "t-mint"],
+  /* summary boxes — click one to filter the board below */
+  const dn = dhakaNow();
+  const todayISO = `${dn.getFullYear()}-${String(dn.getMonth() + 1).padStart(2, "0")}-${String(dn.getDate()).padStart(2, "0")}`;
+  const todayCount = jobs.filter(j => j.date === todayISO).length;
+  const sumBoxes = [
+    ["all", "মোট আবেদন", jobs.length, "t-gold"],
+    ["today", "আজকের আবেদন", todayCount, "t-indigo"],
+    ["interview_done", "ইন্টারভিউ দেওয়া হয়েছে", stCount.interview_done || 0, "t-mint"],
+    ["interview", "সামনে ইন্টারভিউ", stCount.interview || 0, "t-plum"],
   ];
-  $("#jobFunnel").innerHTML = fnStages.map(([label, n, tint]) =>
-    `<div class="fn ${tint}"><b>${bn(n)}</b><span>${label}</span></div>`).join("");
+  $("#jobFunnel").innerHTML = sumBoxes.map(([k, label, n, tint]) =>
+    `<button class="fn ${tint}${sumFilter === k ? " on" : ""}" data-sum="${k}"><b>${bn(n)}</b><span>${label}</span></button>`).join("");
+  $("#jobFunnel").onclick = e => {
+    const b = e.target.closest("[data-sum]");
+    if (b) { sumFilter = b.dataset.sum; renderJobs(); }
+  };
   /* filter tabs */
   const chips = ["সব", ...order.filter(c => byCh[c])];
   $("#jobFilters").innerHTML = chips.map(c =>
@@ -455,15 +464,16 @@ ${shortlist.map(s => `
   /* kanban board */
   const q = jobQuery.trim().toLowerCase();
   const list = jobs.filter(j => (jobFilter === "সব" || j.channel === jobFilter) &&
-    (!q || (j.title + " " + j.company).toLowerCase().includes(q)));
-  const COLS = [["applied", "আবেদন করা"], ["shortlisted", "শর্টলিস্ট"], ["interview", "ইন্টারভিউ"], ["rejected", "রিজেক্ট"], ["offer", "অফার"], ["other", "অন্যান্য"]];
+    (!q || (j.title + " " + j.company).toLowerCase().includes(q)) &&
+    (sumFilter === "all" || (sumFilter === "today" ? j.date === todayISO : jobStatus(j) === sumFilter)));
+  const COLS = [["applied", "আবেদন করা"], ["shortlisted", "শর্টলিস্ট"], ["interview", "ইন্টারভিউ"], ["interview_done", "ইন্টারভিউ দেওয়া হয়েছে"], ["rejected", "রিজেক্ট"], ["offer", "অফার"], ["other", "অন্যান্য"]];
   const colJobs = {};
   COLS.forEach(([k]) => colJobs[k] = []);
   list.forEach(j => {
     const s = jobStatus(j);
     colJobs[STATUSES[s] ? s : "other"].push(j);
   });
-  const searching = q.length > 0;
+  const searching = q.length > 0 || sumFilter !== "all";
   $("#jobList").innerHTML = COLS.filter(([k]) => k !== "other" || colJobs.other.length)
     .filter(([k]) => !searching || colJobs[k].length)
     .map(([k, label]) => `
