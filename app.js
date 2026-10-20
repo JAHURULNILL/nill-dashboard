@@ -693,20 +693,6 @@ function renderQuotes() {
 </button>`;
 }).join("")}</div></div>`;
   }).join("");
-  /* home book-of-the-day = first quote of the day */
-  const h = todayQuotes[0];
-  if (h) {
-    const it = quoteItem(h);
-    PIN_ITEMS[it.id] = it;
-    $("#quoteHero").innerHTML = `
-<div class="h2">আজকের বই</div>
-<div class="mini-book" data-bk="${esc(it.id)}" style="cursor:pointer" role="button" aria-label="বইটি খুলুন">
-<div class="cover ${coverClass(h.book)}" style="padding:12px 10px 10px 16px"><i>${esc(h.category)}</i><strong style="font-size:15px">${esc(bookShort(h.book))}</strong></div>
-<div style="min-width:0"><b style="line-height:1.4;display:block">${esc(bookShort(h.book))}</b><p class="muted" style="font-size:14.5px">${esc(h.author)}</p></div>
-</div>
-<p style="font-size:14.5px;margin-top:12px;color:#4a3185">“${esc(h.quote_bn)}”</p>
-<div class="row" style="margin-top:14px"><button class="btn soft sm" data-nav="quotes">আজকের সব উক্তি</button>${pinBtn(it)}</div>`;
-  }
 }
 function openBookModal(id) {
   const q = QUOTE_BY_PIN[id];
