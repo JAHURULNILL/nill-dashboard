@@ -393,7 +393,7 @@ const STATUSES = {
   interview_done: "ইন্টারভিউ দেওয়া হয়েছে", rejected: "বাতিল", offer: "অফার",
 };
 let statusOv = load("nill_job_status", {});
-let selScope = null;
+let selScope = "all";
 let selChannel = null;
 const jobKey = j => j.title + "|" + j.company + "|" + j.date;
 const jobStatus = j => statusOv[jobKey(j)] || j.status || "applied";
