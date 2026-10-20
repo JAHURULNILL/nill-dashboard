@@ -15,126 +15,148 @@
 <header class="topbar">
   <div class="wrap topbar-in">
     <div class="brand">
-      <span class="brand-mark">🌿</span>
-      <div>
-        <strong>নীলের ড্যাশবোর্ড</strong>
-        <small id="todayLine">লোড হচ্ছে…</small>
-      </div>
+      <strong>নীলের ড্যাশবোর্ড</strong>
+      <small id="todayLine">লোড হচ্ছে…</small>
     </div>
-    <a class="pin-link" href="#" data-nav="pins">📌 পিন করা <span class="badge" id="pinCount">০</span></a>
+    <nav class="mainnav" id="mainNav" aria-label="মূল নেভিগেশন"></nav>
   </div>
-  <nav class="wrap mainnav" id="mainNav" aria-label="মূল নেভিগেশন"></nav>
 </header>
-<nav class="bottomnav" id="bottomNav" aria-label="মূল নেভিগেশন"></nav>
 
 <main class="wrap">
 
   <!-- ১. হোম -->
   <section class="page active" id="page-home">
-    <div class="card hero reveal in">
-      <h1>আসসালামু আলাইকুম, নীল 👋</h1>
-      <p class="hero-date" id="heroDate"></p>
-      <div class="chips" id="statChips"></div>
+    <div class="home-head">
+      <h1>আসসালামু আলাইকুম, নীল</h1>
+      <p class="home-date" id="heroDate"></p>
     </div>
-    <div class="card reveal quote-hero">
+    <div class="stat-row" id="statChips"></div>
+    <div class="card reveal">
+      <h2 class="card-title">আজকের রুটিন</h2>
+      <div class="timeline" id="routineHome"></div>
+    </div>
+    <div class="card reveal">
       <div class="sec-label">আজকের উক্তি</div>
       <div id="quoteHero"></div>
-    </div>
-    <div class="grid-2">
-      <div class="card reveal">
-        <h2>🕘 আজকের রুটিন</h2>
-        <div class="timeline" id="routineHome"></div>
-      </div>
-      <div class="card reveal">
-        <h2>⏳ আসন্ন ডেডলাইন</h2>
-        <div id="homeDeadlines"></div>
-      </div>
     </div>
   </section>
 
   <!-- ২. চাকরি -->
   <section class="page" id="page-jobs">
-    <h2 class="page-title">💼 আমার চাকরির আবেদন</h2>
-    <p class="page-sub">সব চ্যানেলের আবেদন এক জায়গায় — স্ট্যাটাস বদলালে মনে রাখা হবে।</p>
+    <div class="page-head">
+      <h2>আমার চাকরির আবেদন</h2>
+      <p>সব চ্যানেলের আবেদন এক জায়গায় — স্ট্যাটাস বদলালে মনে রাখা হবে।</p>
+    </div>
     <div id="shortlistBox"></div>
     <div class="card reveal">
-      <h3>অগ্রগতির সারসংক্ষেপ</h3>
-      <div class="counter-row" id="jobCounters"></div>
+      <h3 class="card-title">অগ্রগতির সারসংক্ষেপ</h3>
+      <div id="jobCounters"></div>
       <div id="channelBars"></div>
     </div>
     <div class="chips-row" id="jobFilters"></div>
-    <div class="job-list" id="jobList"></div>
+    <div class="card list-card reveal">
+      <div id="jobList"></div>
+    </div>
   </section>
 
   <!-- ৩. শেখা -->
   <section class="page" id="page-learn">
-    <h2 class="page-title">📚 শেখা ও অনুশীলন</h2>
-    <p class="page-sub">যা শিখছো, তার অগ্রগতি — আর শেখা বিষয়ের উপর র‍্যান্ডম অনুশীলন।</p>
+    <div class="page-head">
+      <h2>শেখা ও অনুশীলন</h2>
+      <p>যা শিখছো, তার অগ্রগতি — আর শেখা বিষয়ের উপর র‍্যান্ডম অনুশীলন।</p>
+    </div>
     <div class="card reveal">
-      <h3>🟦 MS Word — WordCraft/ডেস্কটপ Word</h3>
+      <h3 class="card-title">MS Word</h3>
+      <p class="small muted">WordCraft / ডেস্কটপ Word অনুযায়ী পাঠ</p>
       <div class="progress-track"><div class="progress-fill" id="wordBar" style="width:0%"></div></div>
       <p class="small muted" id="wordProgText"></p>
-      <div class="topic-list" id="wordTopics"></div>
-      <p class="small muted" style="margin-top:10px">📊 <span id="quizStats"></span></p>
-      <div class="center" style="margin-top:14px">
-        <button class="btn" id="quizStart">✍️ MCQ অনুশীলন শুরু করো</button>
+      <div class="topic-cols">
+        <div>
+          <h4 class="list-head">শেখা হয়েছে ✓</h4>
+          <div id="wordTopicsTaught"></div>
+        </div>
+        <div>
+          <h4 class="list-head">আসন্ন পাঠ</h4>
+          <div id="wordTopicsSoon"></div>
+        </div>
       </div>
-      <div id="quizBox" style="margin-top:16px"></div>
+      <p class="small muted quiz-stats-line"><span id="quizStats"></span></p>
+      <div class="center">
+        <button class="btn" id="quizStart">MCQ অনুশীলন শুরু করো</button>
+      </div>
+      <div id="quizBox"></div>
     </div>
     <div class="card reveal soon-card">
-      <span class="big">🟩</span>
-      <h3>MS Excel</h3>
+      <h3 class="card-title">MS Excel</h3>
       <p class="muted">Excel পাঠ এখনো শুরু হয়নি — Word শেষ হলেই Excel শেখা শুরু হবে।</p>
     </div>
-    <h2 class="page-title" style="margin-top:8px">🖼️ ছবিসহ উদাহরণ</h2>
-    <p class="page-sub">প্রতিটা নিয়ম Word-এর ভেতর কেমন দেখায়, তা দেখে শেখো।</p>
-    <div class="grid-2" id="exampleGrid"></div>
+    <div class="page-head sub-head">
+      <h3 class="group-title">ছবিসহ উদাহরণ</h3>
+      <p>প্রতিটা নিয়ম Word-এর ভেতর কেমন দেখায়, তা দেখে শেখো।</p>
+    </div>
+    <div id="exampleGrid"></div>
   </section>
 
   <!-- ৪. উক্তি -->
   <section class="page" id="page-quotes">
-    <h2 class="page-title">💬 আজকের উক্তি</h2>
-    <p class="page-sub">বিশ্বের সেরা বইয়ের সেরা ১০টি কথা — প্রতিদিন নতুন সেট আসবে।</p>
+    <div class="page-head">
+      <h2>আজকের উক্তি</h2>
+      <p>বিশ্বের সেরা বইয়ের সেরা ১০টি কথা — প্রতিদিন নতুন সেট আসবে।</p>
+    </div>
     <div class="chips-row" id="quoteFilters"></div>
-    <div class="grid-cards" id="quoteGrid"></div>
+    <div class="card list-card reveal">
+      <div id="quoteList"></div>
+    </div>
   </section>
 
   <!-- ৫. খবর -->
   <section class="page" id="page-news">
-    <h2 class="page-title">📰 আজকের খবর</h2>
-    <p class="page-sub" id="newsUpdated"></p>
+    <div class="page-head">
+      <h2>আজকের খবর</h2>
+      <p id="newsUpdated">খবর লোড হচ্ছে…</p>
+    </div>
     <div id="newsContent"></div>
   </section>
 
   <!-- ৬. আশ্চর্য তথ্য -->
   <section class="page" id="page-facts">
-    <h2 class="page-title">✨ আজকের ১০টি আশ্চর্য তথ্য</h2>
-    <p class="page-sub">প্রতিদিন নতুন ১০টা — অদ্ভুত আর মজার জ্ঞান।</p>
-    <div class="grid-cards" id="factGrid"></div>
+    <div class="page-head">
+      <h2>আজকের ১০টি আশ্চর্য তথ্য</h2>
+      <p>প্রতিদিন নতুন ১০টা — অদ্ভুত আর মজার জ্ঞান।</p>
+    </div>
+    <div class="card list-card reveal">
+      <div id="factList"></div>
+    </div>
   </section>
 
   <!-- ৭. উন্নতি -->
   <section class="page" id="page-growth">
-    <h2 class="page-title">🌱 আজকের ১০টি উন্নতি-আইডিয়া</h2>
-    <p class="page-sub">জীবনটা একটু একটু করে ভালো করার ছোট ছোট পদক্ষেপ।</p>
-    <div class="grid-cards" id="tipGrid"></div>
+    <div class="page-head">
+      <h2>আজকের ১০টি উন্নতি-আইডিয়া</h2>
+      <p>জীবনটা একটু একটু করে ভালো করার ছোট ছোট পদক্ষেপ।</p>
+    </div>
+    <div class="card list-card reveal">
+      <div id="tipList"></div>
+    </div>
     <div class="card reveal">
-      <h2>🕘 আজকের রুটিন</h2>
+      <h2 class="card-title">আজকের রুটিন</h2>
       <div class="timeline" id="routineGrowth"></div>
     </div>
   </section>
 
   <!-- ৮. পিন করা -->
   <section class="page" id="page-pins">
-    <h2 class="page-title">📌 পিন করা</h2>
-    <p class="page-sub">যা ভালো লেগেছে পিন করে রেখেছো — সব এখানে থাকবে।</p>
+    <div class="page-head">
+      <h2>পিন করা</h2>
+      <p>যা ভালো লেগেছে পিন করে রেখেছো — সব এখানে থাকবে।</p>
+    </div>
     <div id="pinGroups"></div>
   </section>
 
 </main>
 
 <footer>
-  নীলের ড্যাশবোর্ড 🌿 — উক্তি, খবর, তথ্য আর টিপস প্রতিদিন আপডেট হয়; পিন করা জিনিস তোমার ফোনেই সেভ থাকে।
+  নীলের ড্যাশবোর্ড — উক্তি, খবর, তথ্য আর টিপস প্রতিদিন আপডেট হয়; পিন করা জিনিস তোমার ফোনেই সেভ থাকে।
 </footer>
 
 <script src="app.js"></script>

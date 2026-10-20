@@ -114,17 +114,15 @@ function refreshPinsUI() {
 
 /* ---------------- navigation ---------------- */
 const SECTIONS = [
-  ["home", "🏠", "হোম"], ["jobs", "💼", "চাকরি"], ["learn", "📚", "শেখা"],
-  ["quotes", "💬", "উক্তি"], ["news", "📰", "খবর"], ["facts", "✨", "তথ্য"],
-  ["growth", "🌱", "উন্নতি"], ["pins", "📌", "পিন"],
+  ["home", "হোম"], ["jobs", "চাকরি"], ["learn", "শেখা"],
+  ["quotes", "উক্তি"], ["news", "খবর"], ["facts", "তথ্য"],
+  ["growth", "উন্নতি"], ["pins", "পিন করা"],
 ];
 let currentPage = "home";
 function buildNav() {
-  const html = SECTIONS.map(([id, ic, label]) =>
-    `<button class="nav-btn${id === currentPage ? " active" : ""}" data-nav="${id}"><span class="ic">${ic}</span> ${label}</button>`
+  $("#mainNav").innerHTML = SECTIONS.map(([id, label]) =>
+    `<button class="nav-btn${id === currentPage ? " active" : ""}" data-nav="${id}">${label}${id === "pins" ? `<span class="badge" id="pinCount">${bn(pins.length)}</span>` : ""}</button>`
   ).join("");
-  $("#mainNav").innerHTML = html;
-  $("#bottomNav").innerHTML = html;
 }
 function go(page) {
   currentPage = page;
@@ -163,50 +161,32 @@ function renderHomeChips() {
   const upcoming = DATA.jobs.jobs
     .filter(j => j.deadline && daysLeft(j.deadline) >= 0)
     .sort((a, b) => a.deadline.localeCompare(b.deadline));
-  const week = upcoming.filter(j => daysLeft(j.deadline) <= 7).length;
   let dlVal = "—", dlLabel = "সামনে কোনো ডেডলাইন নেই";
   if (upcoming.length) {
     const left = daysLeft(upcoming[0].deadline);
-    dlVal = left === 0 ? "আজই!" : "আর " + bn(left) + " দিন";
-    dlLabel = "কাছের ডেডলাইন: " + upcoming[0].company;
+    dlVal = left === 0 ? "আজই" : "আর " + bn(left) + " দিন";
+    dlLabel = "কাছের ডেডলাইন · " + upcoming[0].company;
   }
   const taught = DATA.quiz ? DATA.quiz.topics.filter(t => t.taught).length : 0;
   const tot = DATA.quiz ? DATA.quiz.topics.length : 0;
   const pct = tot ? Math.round(taught / tot * 100) : 0;
   el.innerHTML = `
-    <div class="chip"><b>${bn(total)}টি</b><span>মোট আবেদন করা চাকরি</span></div>
-    <div class="chip"><b>${dlVal}</b><span>${esc(dlLabel)}</span></div>
-    <div class="chip"><b>${bn(week)}টি</b><span>এই সপ্তাহে ডেডলাইন</span></div>
-    <div class="chip"><b>${bn(pct)}%</b><span>শেখা অগ্রগতি (Word)</span></div>
-    <div class="chip"><b>${bn(pins.length)}টি</b><span>পিন করা আইটেম</span></div>`;
-}
-function renderHomeDeadlines() {
-  const el = $("#homeDeadlines");
-  const upcoming = DATA.jobs.jobs
-    .filter(j => j.deadline && daysLeft(j.deadline) >= 0)
-    .sort((a, b) => a.deadline.localeCompare(b.deadline)).slice(0, 5);
-  if (!upcoming.length) { el.innerHTML = `<p class="muted">সামনে কোনো ডেডলাইন নেই। 🎉</p>`; renderHomeChips(); return; }
-  el.innerHTML = upcoming.map(j => {
-    const left = daysLeft(j.deadline);
-    const when = left === 0 ? "আজই!" : left === 1 ? "আগামীকাল" : "আর " + bn(left) + " দিন";
-    return `<div class="dl-row"><span>${esc(j.title)}<br><span class="muted small">${esc(j.company)} • ${esc(j.channel)}</span></span>
-      <span class="dl-when${left <= 1 ? " urgent" : ""}">${when}<br><span class="small muted">${fmtISODate(j.deadline)}</span></span></div>`;
-  }).join("");
-  renderHomeChips();
+    <div class="stat"><b>${bn(total)}টি</b><span>মোট আবেদন</span></div>
+    <div class="stat"><b>${dlVal}</b><span>${esc(dlLabel)}</span></div>
+    <div class="stat"><b>${bn(pct)}%</b><span>শেখা অগ্রগতি (Word)</span></div>`;
 }
 function renderRoutine(el, routine) {
   if (!el || !routine) return;
   const order = ["সকাল", "দুপুর", "বিকেল", "সন্ধ্যা", "রাত"];
-  const icons = { "সকাল": "🌅", "দুপুর": "☀️", "বিকেল": "🌤️", "সন্ধ্যা": "🌆", "রাত": "🌙" };
   el.innerHTML = order.filter(k => routine[k]).map(k => `
-    <div class="tl-item"><h4>${icons[k] || ""} ${esc(k)}</h4>
+    <div class="tl-item"><h4>${esc(k)}</h4>
       <ul>${routine[k].map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
 }
 
 /* ---------------- jobs ---------------- */
 const STATUSES = {
   applied: "আবেদন করা হয়েছে", shortlisted: "শর্টলিস্টেড", interview: "ইন্টারভিউ",
-  rejected: "বাতিল", offer: "অফার 🎉",
+  rejected: "বাতিল", offer: "অফার",
 };
 let statusOv = load("nill_job_status", {});
 let jobFilter = "সব";
@@ -218,18 +198,26 @@ function renderJobs() {
   /* shortlist */
   $("#shortlistBox").innerHTML = `
     <div class="warn-card reveal">
-      <h3>⚠️ শর্টলিস্ট — তোমার নিজের করা বাকি</h3>
+      <h3>শর্টলিস্ট — তোমার নিজের করা বাকি</h3>
       ${shortlist.map(s => `
         <div class="warn-item"><b>${esc(s.title)}</b> — ${esc(s.company)}
           ${s.link ? ` • <a href="${esc(s.link)}" target="_blank" rel="noopener">লিংক ↗</a>` : ""}
           <div class="note">${esc(s.note)}</div></div>`).join("")}
     </div>`;
-  /* counters */
+  /* counters + one slim pipeline progress bar */
+  const stCount = {};
+  jobs.forEach(j => { const s = jobStatus(j); stCount[s] = (stCount[s] || 0) + 1; });
+  const progressed = (stCount.shortlisted || 0) + (stCount.interview || 0) + (stCount.offer || 0);
+  const pipePct = jobs.length ? Math.round(progressed / jobs.length * 100) : 0;
   $("#jobCounters").innerHTML = `
-    <div class="counter"><b>${bn(jobs.length)}টি</b><span>মোট আবেদন (এই ড্যাশবোর্ডে)</span></div>
-    <div class="counter"><b>${bn(counters.nextjobz_oct)}টি</b><span>nextjobz-এ অক্টোবরের আবেদন</span></div>
-    <div class="counter"><b>${bn(counters.shomvob_applied)}টি</b><span>Shomvob-এ মোট আবেদন</span></div>
-    <div class="counter"><b>${bn(counters.bdjobs_quota)}</b><span>Bdjobs মাসিক কোটা ব্যবহৃত</span></div>`;
+    <div class="stat-line">
+      <div class="mini-stat"><b>${bn(jobs.length)}টি</b><span>মোট আবেদন</span></div>
+      <div class="mini-stat"><b>${bn(counters.nextjobz_oct)}টি</b><span>nextjobz (অক্টোবর)</span></div>
+      <div class="mini-stat"><b>${bn(counters.shomvob_applied)}টি</b><span>Shomvob-এ মোট</span></div>
+      <div class="mini-stat"><b>${bn(counters.bdjobs_quota)}</b><span>Bdjobs কোটা ব্যবহৃত</span></div>
+    </div>
+    <p class="small muted">পাইপলাইন অগ্রগতি — শর্টলিস্ট/ইন্টারভিউ/অফারে পৌঁছেছে ${bn(progressed)}টি (${bn(pipePct)}%)</p>
+    <div class="progress-track"><div class="progress-fill" style="width:${pipePct}%"></div></div>`;
   /* channel bars */
   const byCh = {};
   jobs.forEach(j => byCh[j.channel] = (byCh[j.channel] || 0) + 1);
@@ -254,18 +242,19 @@ function renderJobs() {
     const st = jobStatus(j);
     const left = daysLeft(j.deadline);
     const dl = j.deadline
-      ? (left < 0 ? `<span class="job-dl over">ডেডলাইন শেষ (${fmtISODate(j.deadline)})</span>`
-        : left === 0 ? `<span class="job-dl over">ডেডলাইন আজই! (${fmtISODate(j.deadline)})</span>`
-        : `<span class="job-dl">ডেডলাইন: ${fmtISODate(j.deadline)} • আর ${bn(left)} দিন</span>`)
+      ? (left < 0 ? `<div class="dl-line over">ডেডলাইন শেষ (${fmtISODate(j.deadline)})</div>`
+        : left === 0 ? `<div class="dl-line over">ডেডলাইন আজই (${fmtISODate(j.deadline)})</div>`
+        : `<div class="dl-line">ডেডলাইন: ${fmtISODate(j.deadline)} · আর ${bn(left)} দিন</div>`)
       : "";
     const opts = Object.entries(STATUSES).map(([k, v]) =>
       `<option value="${k}"${k === st ? " selected" : ""}>${v}</option>`).join("");
-    return `<article class="job-card reveal">
-      <h4>${esc(j.title)}</h4>
-      <div class="job-meta"><span class="tag">${esc(j.channel)}</span>
-        <span>🏢 ${esc(j.company)}</span><span>📅 ${fmtISODate(j.date)}</span></div>
-      ${dl}
-      <div class="job-foot">
+    return `<article class="job-row">
+      <div class="row-main">
+        <h4>${esc(j.title)}</h4>
+        <div class="meta-line"><span>${esc(j.company)}</span><span>·</span><span>${fmtISODate(j.date)}</span><span class="tag">${esc(j.channel)}</span></div>
+        ${dl}
+      </div>
+      <div class="row-side">
         <select class="status-sel s-${st}" data-jobkey="${esc(jobKey(j))}" aria-label="স্ট্যাটাস">${opts}</select>
         ${j.link ? `<a class="job-link" href="${esc(j.link)}" target="_blank" rel="noopener">পোস্টিং ↗</a>` : ""}
       </div></article>`;
@@ -297,9 +286,12 @@ function renderLearn() {
   $("#wordBar").style.width = pct + "%";
   $("#wordProgText").textContent =
     `${bn(taught.length)}/${bn(q.topics.length)}টি টপিক শেখা হয়েছে (${bn(pct)}%)`;
-  $("#wordTopics").innerHTML =
-    taught.map(t => `<div class="topic-item"><b>✅ ${esc(t.name)}</b>${esc(t.summary_bn)}</div>`).join("") +
-    soon.map(t => `<div class="topic-item"><b>🔜 ${esc(t.name)} <span class="soon">আসন্ন পাঠ</span></b>${esc(t.summary_bn)}</div>`).join("");
+  $("#wordTopicsTaught").innerHTML =
+    taught.map(t => `<div class="topic-item"><b>${esc(t.name)}</b>${esc(t.summary_bn)}</div>`).join("") ||
+    `<p class="small muted">এখনো কোনো পাঠ শেষ হয়নি।</p>`;
+  $("#wordTopicsSoon").innerHTML =
+    soon.map(t => `<div class="topic-item"><b>${esc(t.name)}</b>${esc(t.summary_bn)}</div>`).join("") ||
+    `<p class="small muted">সব পাঠ শেষ — অভিনন্দন!</p>`;
   renderQuizStats();
   renderExamples();
   $("#quizStart").addEventListener("click", startQuiz);
@@ -322,12 +314,12 @@ function renderQuizQ() {
     s.attempts += 1; s.best = Math.max(s.best, quiz.score);
     save("nill_quiz_stats", s);
     renderQuizStats();
-    const msg = quiz.score >= 8 ? "দারুণ! তুমি প্রায় সব পারো 🏆" :
-      quiz.score >= 5 ? "ভালো হয়েছে! আরেকটু অনুশীলনেই পাক্কা হবে 💪" :
-      "শুরুটা হলো — পাঠগুলো আরেকবার দেখে আবার চেষ্টা করো 🌱";
+    const msg = quiz.score >= 8 ? "দারুণ! তুমি প্রায় সব পারো।" :
+      quiz.score >= 5 ? "ভালো হয়েছে! আরেকটু অনুশীলনেই পাক্কা হবে।" :
+      "শুরুটা হলো — পাঠগুলো আরেকবার দেখে আবার চেষ্টা করো।";
     box.innerHTML = `<div class="quiz-score">স্কোর: ${bn(quiz.score)} / ${bn(quiz.qs.length)}<br>
       <span class="small muted">${msg}</span></div>
-      <div class="center"><button class="btn ghost" id="quizAgain">🔁 আবার অনুশীলন</button></div>`;
+      <div class="center"><button class="btn ghost" id="quizAgain">আবার অনুশীলন</button></div>`;
     $("#quizAgain").addEventListener("click", startQuiz);
     return;
   }
@@ -347,9 +339,9 @@ function renderQuizQ() {
     });
     if (pick === item.answer) quiz.score += 1;
     $("#quizExplain").innerHTML = `
-      <div class="quiz-explain">${pick === item.answer ? "✅ সঠিক!" : "❌ ভুল হয়েছে।"} ${esc(item.explain_bn)}</div>
-      <div class="center" style="margin-top:12px"><button class="btn" id="quizNext">${
-        quiz.i + 1 >= quiz.qs.length ? "ফলাফল দেখো" : "পরের প্রশ্ন ➡️"}</button></div>`;
+      <div class="quiz-explain">${pick === item.answer ? "সঠিক উত্তর!" : "ভুল হয়েছে।"} ${esc(item.explain_bn)}</div>
+      <div class="center"><button class="btn" id="quizNext">${
+        quiz.i + 1 >= quiz.qs.length ? "ফলাফল দেখো" : "পরের প্রশ্ন"}</button></div>`;
     $("#quizNext").addEventListener("click", () => { quiz.i += 1; renderQuizQ(); });
   }));
 }
@@ -358,7 +350,7 @@ function renderQuizQ() {
 function mockBody(card) {
   const t = card.title_bn;
   const rule = (card.body_bn.split("নিয়ম:")[1] || "").trim();
-  const ruleHtml = rule ? `<p class="rule">📌 নিয়ম: ${esc(rule)}</p>` : "";
+  const ruleHtml = rule ? `<p class="rule">নিয়ম: ${esc(rule)}</p>` : "";
   let body = "";
   if (t.includes("টেবিল")) {
     body = `<p>টেবিল মানে সারি আর কলামের ছক — যেমন নাম আর নম্বরের তালিকা:</p>
@@ -384,7 +376,7 @@ function mockBody(card) {
     body = `<p>লেখা বাঁচানোর সোনালি ধাপগুলো পরপর:</p>
       <ol class="mock-ol"><li>লেখা শেষ করো বা মাঝপথে থামো</li><li>বাম হাতে Ctrl চেপে ধরো</li>
       <li>ডান হাতে S চাপো</li><li>প্রথমবার হলে ফাইলের একটা নাম দাও</li></ol>
-      <p>ব্যাস! লেখাটা জমা হয়ে গেল — বিদ্যুৎ গেলেও আর ভয় নেই। ⚡</p>`;
+      <p>ব্যাস! লেখাটা জমা হয়ে গেল — বিদ্যুৎ গেলেও আর ভয় নেই।</p>`;
   } else {
     body = `<p style="white-space:pre-wrap">${esc(card.body_bn)}</p>`;
   }
@@ -394,7 +386,7 @@ function renderExamples() {
   $("#exampleGrid").innerHTML = DATA.quiz.example_cards.map(c => `
     <div class="card reveal ex-card"><h4>${esc(c.title_bn)}</h4>
       <div class="mock-word">
-        <div class="mock-titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> 📄 WordCraft — আমার ডকুমেন্ট</div>
+        <div class="mock-titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> WordCraft — আমার ডকুমেন্ট</div>
         <div class="mock-ribbon"><span class="tab on">Home</span><span class="tab">Insert</span><span class="tab">Layout</span>
           <span class="tools"><b>B</b> <i>I</i> <u>U</u> · তালিকা · টেবিল</span></div>
         <div class="mock-body">${mockBody(c)}</div>
@@ -414,44 +406,42 @@ function renderQuotes() {
     if (b) { quoteFilter = b.dataset.qf; renderQuotes(); }
   };
   const list = todayQuotes.filter(q => quoteFilter === "সব" || q.category === quoteFilter);
-  $("#quoteGrid").innerHTML = list.map(q => {
+  $("#quoteList").innerHTML = list.map(q => {
     const item = { id: pinId("উক্তি", q.quote_bn), type: "উক্তি", title: q.quote_bn, body: "", meta: q.book + " — " + q.author };
-    return `<article class="qcard reveal">${pinBtn(item)}
-      <span class="tag" style="align-self:flex-start">${esc(q.category)}</span>
+    return `<article class="qrow">
+      <div class="qrow-top"><span class="tag">${esc(q.category)}</span>${pinBtn(item)}</div>
       <p class="q-text">“${esc(q.quote_bn)}”</p>
-      <p class="q-meta">📖 ${esc(q.book)}<br>✍️ ${esc(q.author)}</p></article>`;
+      <p class="q-meta">${esc(q.book)} — ${esc(q.author)}</p></article>`;
   }).join("");
-  observeReveals();
   /* hero = first quote of the day */
   const h = todayQuotes[0];
   if (h) {
     const item = { id: pinId("উক্তি", h.quote_bn), type: "উক্তি", title: h.quote_bn, body: "", meta: h.book + " — " + h.author };
-    $("#quoteHero").innerHTML = `${pinBtn(item)}
+    $("#quoteHero").innerHTML = `
       <p class="q-text">“${esc(h.quote_bn)}”</p>
-      <p class="q-meta">📖 ${esc(h.book)} • ✍️ ${esc(h.author)}</p>`;
+      <p class="q-meta">${esc(h.book)} — ${esc(h.author)}</p>
+      <div style="margin-top:10px">${pinBtn(item)}</div>`;
   }
 }
 function renderFacts() {
   const facts = dailyPick(DATA.facts, 10, "facts");
-  $("#factGrid").innerHTML = facts.map((f, i) => {
+  $("#factList").innerHTML = facts.map((f, i) => {
     const item = { id: pinId("তথ্য", f.fact_bn), type: "তথ্য", title: f.fact_bn, body: "", meta: "বিষয়: " + f.topic };
-    return `<article class="qcard reveal">${pinBtn(item)}
-      <div class="fact-head"><span class="fact-num">${bn(i + 1)}</span>
-      <div><span class="tag">${esc(f.topic)}</span>
-      <p style="margin-top:8px">${esc(f.fact_bn)}</p></div></div></article>`;
+    return `<article class="frow"><span class="fact-num">${bn(i + 1)}</span>
+      <p>${esc(f.fact_bn)}</p>
+      <span class="tag">${esc(f.topic)}</span>${pinBtn(item)}</article>`;
   }).join("");
-  observeReveals();
 }
 function renderGrowth() {
   const tips = dailyPick(DATA.growth.tips, 10, "tips");
-  $("#tipGrid").innerHTML = tips.map(t => {
+  $("#tipList").innerHTML = tips.map(t => {
     const item = { id: pinId("টিপস", t.title_bn), type: "টিপস", title: t.title_bn, body: t.detail_bn, meta: "বিভাগ: " + t.category };
-    return `<article class="qcard reveal tip-card">${pinBtn(item)}
-      <span class="tag" style="align-self:flex-start">${esc(t.category)}</span>
-      <p class="t-title">${esc(t.title_bn)}</p><p>${esc(t.detail_bn)}</p></article>`;
+    return `<article class="trow">
+      <div class="trow-top"><p class="t-title">${esc(t.title_bn)}</p>${pinBtn(item)}</div>
+      <p>${esc(t.detail_bn)}</p>
+      <p style="margin-top:6px"><span class="tag">${esc(t.category)}</span></p></article>`;
   }).join("");
   renderRoutine($("#routineGrowth"), DATA.growth.routine);
-  observeReveals();
 }
 
 /* ---------------- news ---------------- */
@@ -459,44 +449,45 @@ function renderNews() {
   const n = DATA.news;
   if (!n) {
     $("#newsUpdated").textContent = "খবর লোড করা যায়নি — পরে আবার চেষ্টা করো।";
-    $("#newsContent").innerHTML = `<div class="empty-state"><span class="big">📡</span>খবরের ফাইল পাওয়া যায়নি।</div>`;
+    $("#newsContent").innerHTML = `<div class="empty-state">খবরের ফাইল পাওয়া যায়নি।</div>`;
     return;
   }
-  $("#newsUpdated").textContent = "🕐 সর্বশেষ আপডেট: " + fmtDate(dhakaNow()) + " — " + relTime(n.updated);
-  const groups = [["bangladesh", "🇧🇩 বাংলাদেশ"], ["tech", "🤖 প্রযুক্তি ও AI"], ["world", "🌍 বিশ্ব"]];
+  $("#newsUpdated").textContent = "সর্বশেষ আপডেট: " + fmtDate(dhakaNow()) + " — " + relTime(n.updated);
+  const groups = [["bangladesh", "বাংলাদেশ"], ["tech", "প্রযুক্তি ও AI"], ["world", "বিশ্ব"]];
   $("#newsContent").innerHTML = groups.map(([key, label]) => `
-    <div class="news-group"><h3>${label}</h3>
+    <div class="card list-card news-group reveal"><h3 class="group-title">${label}</h3>
     ${(n[key] || []).map(it => {
       const item = { id: pinId("খবর", it.title), type: "খবর", title: it.title, body: it.summary, meta: it.source };
-      return `<article class="news-item reveal">${pinBtn(item)}
-        <h4><a href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.title)}</a></h4>
-        ${it.summary ? `<p>${esc(it.summary)}</p>` : ""}
-        <div class="news-meta"><span>📰 ${esc(it.source)}</span><span>🕐 ${relTime(it.published)}</span>
-        <a href="${esc(it.link)}" target="_blank" rel="noopener">মূল খবর ↗</a></div></article>`;
-    }).join("") || `<div class="empty-state">এই বিভাগে এখনো খবর নেই।</div>`}
+      return `<article class="nrow">
+        <div class="row-main">
+          <h4><a href="${esc(it.link)}" target="_blank" rel="noopener">${esc(it.title)}</a></h4>
+          ${it.summary ? `<p class="summary">${esc(it.summary)}</p>` : ""}
+          <div class="meta-line"><span>${esc(it.source)}</span><span>·</span><span>${relTime(it.published)}</span><span>·</span><a href="${esc(it.link)}" target="_blank" rel="noopener">মূল খবর ↗</a></div>
+        </div>${pinBtn(item)}</article>`;
+    }).join("") || `<p class="muted" style="padding:16px 0">এই বিভাগে এখনো খবর নেই।</p>`}
     </div>`).join("");
   observeReveals();
 }
 
 /* ---------------- pins page ---------------- */
 const PIN_TYPE_ORDER = ["উক্তি", "খবর", "তথ্য", "টিপস"];
-const PIN_TYPE_LABEL = { "উক্তি": "💬 উক্তি", "খবর": "📰 খবর", "তথ্য": "✨ তথ্য", "টিপস": "🌱 উন্নতি-টিপস" };
+const PIN_TYPE_LABEL = { "উক্তি": "উক্তি", "খবর": "খবর", "তথ্য": "তথ্য", "টিপস": "উন্নতি-টিপস" };
 function renderPins() {
   const el = $("#pinGroups");
   if (!el) return;
   if (!pins.length) {
-    el.innerHTML = `<div class="empty-state"><span class="big">📌</span>
+    el.innerHTML = `<div class="empty-state">
       এখনো কিছু পিন করোনি।<br>উক্তি, খবর, তথ্য বা টিপসের পাশে 📌 চাপলেই তা এখানে থেকে যাবে — প্রতিদিনের সেট বদলে গেলেও।</div>`;
     return;
   }
   el.innerHTML = PIN_TYPE_ORDER.filter(t => pins.some(p => p.type === t)).map(t => `
-    <div class="pin-group"><h3>${PIN_TYPE_LABEL[t]}</h3>
-    <div class="grid-cards">${pins.filter(p => p.type === t).map(p => `
-      <article class="qcard"><p class="${p.type === "উক্তি" ? "q-text" : "t-title"}">${p.type === "উক্তি" ? "“" + esc(p.title) + "”" : esc(p.title)}</p>
+    <div class="card list-card pin-group"><h3 class="group-title">${PIN_TYPE_LABEL[t]}</h3>
+    ${pins.filter(p => p.type === t).map(p => `
+      <article class="prow"><p class="${p.type === "উক্তি" ? "q-text" : "t-title"}">${p.type === "উক্তি" ? "“" + esc(p.title) + "”" : esc(p.title)}</p>
         ${p.body ? `<p>${esc(p.body)}</p>` : ""}
-        <p class="q-meta">${esc(p.meta)}<br><span class="small">📌 পিন করা: ${esc(p.pinned_date)}</span></p>
-        <button class="unpin-btn" data-unpin="${esc(p.id)}">✖ পিন সরাও</button></article>`).join("")}
-    </div></div>`).join("");
+        <p class="q-meta">${esc(p.meta)}<br><span class="small">পিন করা: ${esc(p.pinned_date)}</span></p>
+        <button class="unpin-btn" data-unpin="${esc(p.id)}">পিন সরাও</button></article>`).join("")}
+    </div>`).join("");
 }
 document.addEventListener("click", e => {
   const u = e.target.closest("[data-unpin]");
@@ -516,9 +507,9 @@ document.addEventListener("click", e => {
   DATA = { jobs, quotes, quiz, facts, growth, news };
   if (!jobs || !quotes || !quiz || !facts || !growth) {
     $("main").insertAdjacentHTML("afterbegin",
-      `<div class="err-box">⚠️ কিছু তথ্য লোড হয়নি — ইন্টারনেট সংযোগ দেখে পেজটি রিফ্রেশ করো।</div>`);
+      `<div class="err-box">কিছু তথ্য লোড হয়নি — ইন্টারনেট সংযোগ দেখে পেজটি রিফ্রেশ করো।</div>`);
   }
-  if (jobs) { renderHomeDeadlines(); renderJobs(); }
+  if (jobs) { renderJobs(); renderHomeChips(); }
   if (quiz) renderLearn();
   if (quotes) renderQuotes();
   if (facts) renderFacts();
