@@ -393,9 +393,8 @@ const STATUSES = {
   interview_done: "ইন্টারভিউ দেওয়া হয়েছে", rejected: "বাতিল", offer: "অফার",
 };
 let statusOv = load("nill_job_status", {});
-let jobFilter = "সব";
-let jobQuery = "";
-let sumFilter = "all";
+let selScope = null;
+let selChannel = null;
 const jobKey = j => j.title + "|" + j.company + "|" + j.date;
 const jobStatus = j => statusOv[jobKey(j)] || j.status || "applied";
 const AV_COLORS = ["#4357E8", "#1BA383", "#D68A06", "#E2536F", "#2C97D3", "#7B4FD2"];
@@ -418,24 +417,8 @@ ${shortlist.map(s => `
 <div class="shortlist-item"><div class="sl-row"><div><div class="sl-role">${esc(s.title)}</div><div class="sl-co">${esc(s.company)}</div></div>
 <div class="sl-side">${s.salary ? `<span class="sl-salary">বেতন: ${esc(s.salary)}</span>` : ""}${s.link ? `<a class="sl-link" href="${esc(s.link)}" target="_blank" rel="noopener">আবেদন লিংক ↗</a>` : ""}</div></div></div>`).join("")}
 </div>`;
-  /* counters */
-  $("#jobCounters").innerHTML = `
-<div class="counter-row">
-<div class="counter-item"><b>${bn(counters.nextjobz_oct)}টি</b><span>nextjobz (অক্টোবর)</span></div>
-<div class="counter-item"><b>${bn(counters.shomvob_applied)}টি</b><span>Shomvob-এ মোট</span></div>
-<div class="counter-item"><b>${bn(counters.bdjobs_quota)}</b><span>Bdjobs কোটা ব্যবহৃত</span></div>
-<div class="counter-item"><b>${bn((stCount.interview || 0) + (stCount.interview_done || 0))}টি</b><span>ইন্টারভিউ ধাপে</span></div>
-</div>`;
-  /* channel bars */
-  const byCh = {};
-  jobs.forEach(j => byCh[j.channel] = (byCh[j.channel] || 0) + 1);
-  const max = Math.max(...Object.values(byCh));
-  const order = ["LinkedIn", "nextjobz", "Bdjobs", "Shomvob", "Facebook", "Email"];
-  const chColors = { LinkedIn: "#4357E8", nextjobz: "#2C97D3", Bdjobs: "#1BA383", Shomvob: "#F2A413", Facebook: "#7B4FD2", Email: "#E2536F" };
-  $("#channelBars").innerHTML = order.filter(c => byCh[c]).map(c => `
-<div class="bar-row"><span>${esc(c)}</span>
-<div class="bar"><i style="width:${Math.round(byCh[c] / max * 100)}%;background:${chColors[c] || "var(--indigo)"}"></i></div>
-<b>${bn(byCh[c])}টি</b></div>`).join("");
+  /* portal counters — small note at the bottom of the হিসাব card */
+  $("#jobPortalNote").textContent = `পোর্টালের হিসাব: nextjobz-এ অক্টোবরে ${bn(counters.nextjobz_oct)}টি · Shomvob-এ মোট ${bn(counters.shomvob_applied)}টি · Bdjobs কোটা ${bn(counters.bdjobs_quota)}`;
   /* summary boxes — click one to filter the board below */
   const dn = dhakaNow();
   const todayISO = `${dn.getFullYear()}-${String(dn.getMonth() + 1).padStart(2, "0")}-${String(dn.getDate()).padStart(2, "0")}`;
@@ -447,60 +430,67 @@ ${shortlist.map(s => `
     ["interview", "সামনে ইন্টারভিউ", stCount.interview || 0, "t-plum"],
   ];
   $("#jobFunnel").innerHTML = sumBoxes.map(([k, label, n, tint]) =>
-    `<button class="fn ${tint}${sumFilter === k ? " on" : ""}" data-sum="${k}"><b>${bn(n)}</b><span>${label}</span></button>`).join("");
+    `<button class="fn ${tint}${selScope === k ? " on" : ""}" data-sum="${k}"><b>${bn(n)}</b><span>${label}</span></button>`).join("");
   $("#jobFunnel").onclick = e => {
     const b = e.target.closest("[data-sum]");
-    if (b) { sumFilter = b.dataset.sum; renderJobs(); }
+    if (b) { selScope = b.dataset.sum; selChannel = null; renderJobs(); }
   };
-  /* filter tabs */
-  const chips = ["সব", ...order.filter(c => byCh[c])];
-  $("#jobFilters").innerHTML = chips.map(c =>
-    `<button class="tab${jobFilter === c ? " on" : ""}" data-filter="${esc(c)}">${esc(c)}${c === "সব" ? "" : " (" + bn(byCh[c]) + ")"}</button>`
-  ).join("");
-  $("#jobFilters").onclick = e => {
-    const b = e.target.closest("[data-filter]");
-    if (b) { jobFilter = b.dataset.filter; renderJobs(); }
+  /* channel breakdown — appears once a summary box is picked */
+  const CHANNEL_ORDER = ["LinkedIn", "nextjobz", "Bdjobs", "Shomvob", "Facebook", "Email"];
+  const scoped = selScope === null ? [] : selScope === "all" ? jobs
+    : selScope === "today" ? jobs.filter(j => j.date === todayISO)
+    : jobs.filter(j => jobStatus(j) === selScope);
+  const chCounts = {};
+  scoped.forEach(j => chCounts[j.channel] = (chCounts[j.channel] || 0) + 1);
+  const chEl = $("#jobChannels");
+  if (selScope === null) {
+    chEl.innerHTML = `<p class="muted" style="font-size:14.5px">উপরের যেকোনো বাক্সে চাপ দাও — মাধ্যম অনুযায়ী কত আবেদন হয়েছে, এখানে দেখাবে।</p>`;
+  } else {
+    const chs = CHANNEL_ORDER.filter(c => chCounts[c]);
+    chEl.innerHTML = chs.length
+      ? `<div class="ch-grid">${chs.map(c => `<button class="ch-tile${selChannel === c ? " on" : ""}" data-ch="${esc(c)}"><b>${bn(chCounts[c])}টি</b><span>${esc(c)}</span></button>`).join("")}</div>`
+      : `<p class="muted" style="font-size:14.5px">এই হিসাবে কোনো আবেদন নেই।</p>`;
+  }
+  chEl.onclick = e => {
+    const b = e.target.closest("[data-ch]");
+    if (b) { selChannel = b.dataset.ch; renderJobs(); }
   };
-  /* kanban board */
-  const q = jobQuery.trim().toLowerCase();
-  const list = jobs.filter(j => (jobFilter === "সব" || j.channel === jobFilter) &&
-    (!q || (j.title + " " + j.company).toLowerCase().includes(q)) &&
-    (sumFilter === "all" || (sumFilter === "today" ? j.date === todayISO : jobStatus(j) === sumFilter)));
-  const COLS = [["applied", "আবেদন করা"], ["shortlisted", "শর্টলিস্ট"], ["interview", "ইন্টারভিউ"], ["interview_done", "ইন্টারভিউ দেওয়া হয়েছে"], ["rejected", "রিজেক্ট"], ["offer", "অফার"], ["other", "অন্যান্য"]];
-  const colJobs = {};
-  COLS.forEach(([k]) => colJobs[k] = []);
-  list.forEach(j => {
-    const s = jobStatus(j);
-    colJobs[STATUSES[s] ? s : "other"].push(j);
-  });
-  const searching = q.length > 0 || sumFilter !== "all";
-  $("#jobList").innerHTML = COLS.filter(([k]) => k !== "other" || colJobs.other.length)
-    .filter(([k]) => !searching || colJobs[k].length)
-    .map(([k, label]) => `
-<div class="col"><div class="col-h">${label} <em>${bn(colJobs[k].length)}</em></div>
-${colJobs[k].map(j => {
-  const st = jobStatus(j);
-  const left = daysLeft(j.deadline);
-  const dlChip = j.deadline
-    ? (left < 0 ? `<span class="chip rose">ডেডলাইন শেষ</span>`
-      : left === 0 ? `<span class="chip rose">ডেডলাইন আজই</span>`
-      : left <= 7 ? `<span class="chip rose">ডেডলাইন ${fmtISODate(j.deadline)}</span>`
-      : `<span class="chip">ডেডলাইন ${fmtISODate(j.deadline)}</span>`)
-    : "";
-  const opts = Object.entries(STATUSES).map(([ok, v]) =>
-    `<option value="${ok}"${ok === st ? " selected" : ""}>${v}</option>`).join("");
-  const mark = esc((j.company || "?").trim().charAt(0) || "?");
-  const avBg = AV_COLORS[hashStr(j.company || "") % AV_COLORS.length];
-  return `<article class="job">
+  /* job results — only after a channel is picked */
+  const resEl = $("#jobResults");
+  if (selScope === null) {
+    resEl.innerHTML = "";
+  } else if (!selChannel) {
+    resEl.innerHTML = `<p class="muted" style="font-size:14.5px;margin-top:14px">একটি মাধ্যম বেছে নাও — সেই মাধ্যমের চাকরিগুলো এখানে দেখাবে।</p>`;
+  } else {
+    const list = scoped.filter(j => j.channel === selChannel);
+    const GROUPS = [["applied", "আবেদন করা"], ["shortlisted", "শর্টলিস্ট"], ["interview", "ইন্টারভিউ"], ["interview_done", "ইন্টারভিউ দেওয়া হয়েছে"], ["rejected", "রিজেক্ট"], ["offer", "অফার"], ["other", "অন্যান্য"]];
+    const jobCard = j => {
+      const st = jobStatus(j);
+      const left = daysLeft(j.deadline);
+      const dlChip = j.deadline
+        ? (left < 0 ? `<span class="chip rose">ডেডলাইন শেষ</span>`
+          : left === 0 ? `<span class="chip rose">ডেডলাইন আজই</span>`
+          : left <= 7 ? `<span class="chip rose">ডেডলাইন ${fmtISODate(j.deadline)}</span>`
+          : `<span class="chip">ডেডলাইন ${fmtISODate(j.deadline)}</span>`)
+        : "";
+      const opts = Object.entries(STATUSES).map(([ok, v]) =>
+        `<option value="${ok}"${ok === st ? " selected" : ""}>${v}</option>`).join("");
+      const mark = esc((j.company || "?").trim().charAt(0) || "?");
+      const avBg = AV_COLORS[hashStr(j.company || "") % AV_COLORS.length];
+      return `<article class="job">
 <div class="who"><span class="av" style="background:${avBg}">${mark}</span><div><b>${esc(j.title)}</b><small>${esc(j.company)}</small></div></div>
-<div class="tags"><span class="chip indigo">${esc(j.channel)}</span><span class="chip">আবেদন ${fmtISODate(j.date)}</span>${dlChip}</div>
+<div class="tags"><span class="chip">আবেদন ${fmtISODate(j.date)}</span>${dlChip}</div>
 <div class="job-foot">
 ${j.link ? `<a class="job-link" href="${esc(j.link)}" target="_blank" rel="noopener">পোস্টিং দেখো ↗</a>` : `<span class="no-link">লিংক নেই</span>`}
 <select class="job-status-select" data-jobkey="${esc(jobKey(j))}" aria-label="স্ট্যাটাস বদলাও">${opts}</select>
 </div></article>`;
-}).join("") || `<div class="col-empty">এই ধাপে কিছু নেই</div>`}
-</div>`).join("") || `<div class="col"><div class="col-empty">কোনো আবেদন মেলেনি — অন্য নামে খুঁজে দেখো।</div></div>`;
-  $("#jobList").onchange = e => {
+    };
+    const groups = GROUPS.map(([k, label]) => [label, list.filter(j => (STATUSES[jobStatus(j)] ? jobStatus(j) : "other") === k)]).filter(([, arr]) => arr.length);
+    resEl.innerHTML = `<div class="divider" style="margin:18px 0 4px"></div>` + (groups.map(([label, arr]) => `
+<div class="res-h">${label} <em>${bn(arr.length)}</em></div>
+<div class="res-list">${arr.map(jobCard).join("")}</div>`).join("") || `<p class="muted" style="font-size:14.5px">এই মাধ্যমে কোনো চাকরি নেই।</p>`);
+  }
+  resEl.onchange = e => {
     const sel = e.target.closest("[data-jobkey]");
     if (!sel) return;
     statusOv[sel.dataset.jobkey] = sel.value;
@@ -936,8 +926,6 @@ ${p.body ? `<p class="p-body">${esc(p.body)}</p>` : ""}
   const d = dhakaNow();
   $("#heroDate").textContent = fmtDate(d);
   $("#heroGreeting").textContent = greetingText() + ", নীল";
-  const sp = $("#jobSearch");
-  if (sp) sp.addEventListener("input", () => { jobQuery = sp.value; if (DATA.jobs) renderJobs(); });
   wireTimer();
   renderDayProgress();
   setInterval(renderDayProgress, 60000);

@@ -404,6 +404,17 @@ button.chip{border:0;cursor:pointer;font:inherit}
 button.fn{border:0;font:inherit;text-align:left;cursor:pointer;width:100%;transition:transform .15s,box-shadow .15s}
 button.fn:hover{transform:translateY(-2px)}
 button.fn.on{box-shadow:0 0 0 2.5px var(--indigo),0 10px 22px rgba(26,32,64,.13)}
+.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ch-tile{border:0;font:inherit;text-align:left;cursor:pointer;background:var(--bg);border-radius:16px;padding:13px 16px;transition:transform .15s,box-shadow .15s}
+.ch-tile:hover{transform:translateY(-2px)}
+.ch-tile b{font-family:var(--serif);font-size:25px;font-weight:800;line-height:1.1;display:block}
+.ch-tile span{font-size:14px;color:var(--muted)}
+.ch-tile.on{box-shadow:0 0 0 2.5px var(--indigo);background:#EEF0FE}
+.res-h{font-family:var(--serif);font-size:16.5px;font-weight:800;margin:14px 0 8px}
+.res-h em{font-style:normal;color:var(--muted);font-family:var(--sans);font-size:13px;font-weight:600}
+.res-list{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:760px){.res-list{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.ch-grid{grid-template-columns:repeat(2,1fr)}}
 .jobs-toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px}
 .search-inline{display:flex;align-items:center;gap:9px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:0 13px;flex:1;min-width:230px;color:var(--muted)}
 .search-inline input{flex:1;border:0;outline:none;font:inherit;padding:10px 2px;background:transparent;color:var(--ink);min-width:0}
