@@ -170,10 +170,13 @@ function renderHomeChips() {
   const taught = DATA.quiz ? DATA.quiz.topics.filter(t => t.taught).length : 0;
   const tot = DATA.quiz ? DATA.quiz.topics.length : 0;
   const pct = tot ? Math.round(taught / tot * 100) : 0;
+  const icoBrief = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2.5"/><path d="M9 8V6.5A2.5 2.5 0 0 1 11.5 4h1A2.5 2.5 0 0 1 15 6.5V8M3 13.5h18"/></svg>`;
+  const icoCal = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>`;
+  const icoBook = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.2C10 4.7 7.4 4.2 4 4.2v14c3.4 0 6 .5 8 2 2-1.5 4.6-2 8-2v-14c-3.4 0-6 .5-8 2z"/><path d="M12 6.2v14"/></svg>`;
   el.innerHTML = `
-    <div class="stat"><b>${bn(total)}টি</b><span>মোট আবেদন</span></div>
-    <div class="stat"><b>${dlVal}</b><span>${esc(dlLabel)}</span></div>
-    <div class="stat"><b>${bn(pct)}%</b><span>শেখা অগ্রগতি (Word)</span></div>`;
+    <div class="stat"><span class="stat-ico tint-blue">${icoBrief}</span><b>${bn(total)}টি</b><span class="lbl">মোট আবেদন</span></div>
+    <div class="stat"><span class="stat-ico tint-amber">${icoCal}</span><b>${dlVal}</b><span class="lbl">${esc(dlLabel)}</span></div>
+    <div class="stat"><span class="stat-ico tint-teal">${icoBook}</span><b>${bn(pct)}%</b><span class="lbl">শেখা অগ্রগতি (Word)</span></div>`;
 }
 function renderRoutine(el, routine) {
   if (!el || !routine) return;
@@ -386,7 +389,7 @@ function renderExamples() {
   $("#exampleGrid").innerHTML = DATA.quiz.example_cards.map(c => `
     <div class="card reveal ex-card"><h4>${esc(c.title_bn)}</h4>
       <div class="mock-word">
-        <div class="mock-titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> WordCraft — আমার ডকুমেন্ট</div>
+        <div class="mock-titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mock-title">WordCraft — আমার ডকুমেন্ট</span></div>
         <div class="mock-ribbon"><span class="tab on">Home</span><span class="tab">Insert</span><span class="tab">Layout</span>
           <span class="tools"><b>B</b> <i>I</i> <u>U</u> · তালিকা · টেবিল</span></div>
         <div class="mock-body">${mockBody(c)}</div>
