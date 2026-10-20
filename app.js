@@ -189,8 +189,6 @@ document.addEventListener("click", e => {
   if (nav) { e.preventDefault(); go(nav.dataset.nav); return; }
   const sr = e.target.closest("[data-search]");
   if (sr) { openSearch(); return; }
-  const bk = e.target.closest("[data-bk]");
-  if (bk) { openBookModal(bk.dataset.bk); return; }
   const pt = e.target.closest("[data-pintoggle]");
   if (pt) {
     togglePin(pt.dataset.pintoggle);
@@ -233,8 +231,7 @@ let SEARCH_INDEX = [], SEARCH_RES = [];
 function buildSearchIndex() {
   const idx = [];
   todayQuotes.forEach(q => {
-    const id = pinId("উক্তি", q.quote_bn);
-    idx.push({ l: bookShort(q.book), s: q.author + " · বই", go: () => { go("quotes"); openBookModal(id); } });
+    idx.push({ l: bookShort(q.book), s: q.author + " · বই", go: () => go("quotes") });
   });
   if (DATA.quiz) DATA.quiz.topics.forEach(t =>
     idx.push({ l: t.name, s: "MS Word · পাঠ", go: () => go("learn") }));
@@ -661,16 +658,16 @@ function renderExamples() {
 /* ---------------- books (উক্তি) + modal ---------------- */
 const QUOTE_CATS = ["আত্মোন্নয়ন", "ব্যবসা", "প্রেম", "দর্শন", "জীবন"];
 let quoteFilter = "সব";
-const QUOTE_BY_PIN = {};
 const bookShort = b => String(b || "").replace(/\s*\([^)]*\)\s*$/, "").trim() || b;
-const coverClass = b => "c" + (hashStr(String(b || "")) % 8 + 1);
 function quoteItem(q) {
-  return { id: pinId("উক্তি", q.quote_bn), type: "উক্তি", title: q.quote_bn, body: "", meta: q.book + " — " + q.author };
+  const shown = q.text_bn || q.text || "";
+  const title = shown.length > 140 ? shown.slice(0, 140).trim() + "…" : shown;
+  return { id: pinId("উক্তি", q.text), type: "উক্তি", title, body: "", meta: q.author + " · " + bookShort(q.book) };
 }
 function renderQuotes() {
   todayQuotes = QUOTE_CATS.flatMap(cat =>
     dailyPick(DATA.quotes.filter(q => q.category === cat), 2, "quote:" + cat));
-  todayQuotes.forEach(q => { const it = quoteItem(q); PIN_ITEMS[it.id] = it; QUOTE_BY_PIN[it.id] = q; });
+  todayQuotes.forEach(q => { const it = quoteItem(q); PIN_ITEMS[it.id] = it; });
   $("#quoteFilters").innerHTML = ["সব", ...QUOTE_CATS].map(c =>
     `<button class="tab${quoteFilter === c ? " on" : ""}" data-qf="${esc(c)}">${esc(c)}</button>`).join("");
   $("#quoteFilters").onclick = e => {
@@ -683,30 +680,15 @@ function renderQuotes() {
     if (!list.length) return "";
     return `<div class="shelf">
 <div class="shelf-h"><h2>${esc(cat)}</h2><p>আজকের ${bn(list.length)}টি উক্তি</p></div>
-<div class="books">${list.map(q => {
+<div class="quotes-list">${list.map(q => {
   const it = quoteItem(q);
-  return `<button class="bk" data-bk="${esc(it.id)}">
-<div class="cover ${coverClass(q.book)}"><i>${esc(q.category)}</i><strong>${esc(bookShort(q.book))}</strong></div>
-<p class="bk-q">“${esc(q.quote_bn)}”</p>
-<div class="bk-foot"><p class="bk-a">${esc(q.author)}</p><span class="chip gold" data-pinchip="${esc(it.id)}"${isPinned(it.id) ? "" : ' style="display:none"'}>পিন করা</span></div>
-</button>`;
+  return `<article class="lq">
+<p class="lq-text">${esc(q.text)}</p>
+${q.text_bn ? `<p class="lq-tr">${esc(q.text_bn)}</p>` : ""}
+<div class="lq-foot"><span class="lq-meta">${esc(q.author)} · ${esc(bookShort(q.book))}</span>${pinBtn(it)}</div>
+</article>`;
 }).join("")}</div></div>`;
   }).join("");
-}
-function openBookModal(id) {
-  const q = QUOTE_BY_PIN[id];
-  if (!q) return;
-  const it = quoteItem(q);
-  PIN_ITEMS[it.id] = it;
-  const pinned = isPinned(id);
-  openDlg(`<div class="dl">${xbtn()}
-<div class="bk-modal"><div class="cover ${coverClass(q.book)}"><i>${esc(q.category)}</i><strong>${esc(bookShort(q.book))}</strong></div>
-<div><h2 style="margin-right:36px">${esc(bookShort(q.book))}</h2>
-<p class="muted" style="margin:-6px 0 10px">${esc(q.author)} · ${esc(q.category)}</p>
-<p class="bk-quote">“${esc(q.quote_bn)}”</p>
-<p class="fine">${esc(q.book)}</p></div></div>
-<div class="status-row"><button class="stbtn${pinned ? " on" : ""}" data-pintoggle="${esc(id)}">${pinned ? "পিন করা হয়েছে ✓" : "পিন করো"}</button><button class="stbtn" data-close>বন্ধ করুন</button></div>
-</div>`);
 }
 
 /* facts */
