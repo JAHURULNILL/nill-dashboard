@@ -412,11 +412,10 @@ function renderJobs() {
   /* shortlist — gold tint card */
   $("#shortlistBox").innerHTML = `
 <div class="card tint t-gold">
-<div class="h2">শর্টলিস্ট — তোমার নিজের করা বাকি</div>
-<p style="font-size:14.5px;color:#6B4A06;margin-bottom:6px">এই আবেদনগুলো তোমাকে নিজে শেষ করতে হবে — মোট ${bn(shortlist.length)}টি।</p>
+<div class="sl-head"><h3>এই আবেদনগুলো তোমার নিজের করতে হবে</h3><span class="chip gold">${bn(shortlist.length)}টি বাকি</span></div>
 ${shortlist.map(s => `
-<div class="shortlist-item"><b>${esc(s.title)}</b> — ${esc(s.company)}${s.link ? ` · <a href="${esc(s.link)}" target="_blank" rel="noopener">লিংক ↗</a>` : ""}
-<div class="note">${esc(s.note)}</div></div>`).join("")}
+<div class="shortlist-item"><div class="sl-row"><div><div class="sl-role">${esc(s.title)}</div><div class="sl-co">${esc(s.company)}</div></div>
+<div class="sl-side">${s.salary ? `<span class="sl-salary">বেতন: ${esc(s.salary)}</span>` : ""}${s.link ? `<a class="sl-link" href="${esc(s.link)}" target="_blank" rel="noopener">আবেদন লিংক ↗</a>` : ""}</div></div></div>`).join("")}
 </div>`;
   /* counters */
   $("#jobCounters").innerHTML = `

@@ -386,10 +386,21 @@ button.chip{border:0;cursor:pointer;font:inherit}
 .bar-row{display:grid;grid-template-columns:84px 1fr 46px;gap:10px;align-items:center;font-size:14px}
 .bar-row .bar{height:8px}
 .bar-row b{text-align:right;font-family:var(--serif)}
-.shortlist-item{padding:11px 0;border-top:1px solid rgba(184,118,10,.28);font-size:15px}
+.shortlist-item{padding:13px 0;border-top:1px solid rgba(184,118,10,.28);font-size:15px}
 .shortlist-item:first-of-type{border-top:0}
 .shortlist-item .note{font-size:14px;color:#6B4A06;margin-top:2px;line-height:1.55}
 .shortlist-item a{color:var(--gold-d);font-weight:600}
+.sl-head{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #EFD491;border-radius:14px;padding:13px 15px;margin-bottom:8px;box-shadow:0 3px 10px rgba(184,118,10,.10)}
+.sl-head h3{font-family:var(--serif);font-size:19px;font-weight:800;line-height:1.45;color:#7A5203;margin:0}
+.sl-head .chip{flex:none}
+.sl-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sl-role{font-size:16px;font-weight:700;color:var(--ink);line-height:1.45}
+.sl-co{font-size:14px;color:#6B4A06;margin-top:2px}
+.sl-side{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex:none}
+.sl-salary{font-size:12.5px;font-weight:700;color:#7A5203;background:#FCEFC7;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.sl-link{font-size:13.5px;font-weight:700;color:var(--gold-d);background:#fff;border:1px solid #EFD491;border-radius:999px;padding:6px 12px;white-space:nowrap}
+.sl-link:hover{background:#FFF7DC}
+@media(max-width:640px){.sl-head h3{font-size:17px}.sl-role{font-size:15px}}
 .jobs-toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px}
 .search-inline{display:flex;align-items:center;gap:9px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:0 13px;flex:1;min-width:230px;color:var(--muted)}
 .search-inline input{flex:1;border:0;outline:none;font:inherit;padding:10px 2px;background:transparent;color:var(--ink);min-width:0}
