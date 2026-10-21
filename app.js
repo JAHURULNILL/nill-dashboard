@@ -174,13 +174,7 @@ function go(page) {
 }
 
 /* dialogs */
-const dlg = () => $("#dlg"), srch = () => $("#srch");
-function openDlg(html) {
-  const d = dlg();
-  d.innerHTML = html;
-  if (!d.open) { try { d.showModal(); } catch { d.setAttribute("open", ""); } }
-}
-function closeDlg() { const d = dlg(); if (d.open) d.close(); }
+const srch = () => $("#srch");
 const xbtn = () => `<button class="xbtn" data-close aria-label="বন্ধ করুন">✕</button>`;
 
 /* global clicks */
@@ -189,15 +183,6 @@ document.addEventListener("click", e => {
   if (nav) { e.preventDefault(); go(nav.dataset.nav); return; }
   const sr = e.target.closest("[data-search]");
   if (sr) { openSearch(); return; }
-  const pt = e.target.closest("[data-pintoggle]");
-  if (pt) {
-    togglePin(pt.dataset.pintoggle);
-    const on = isPinned(pt.dataset.pintoggle);
-    pt.classList.toggle("on", on);
-    pt.textContent = on ? "পিন করা হয়েছে ✓" : "পিন করো";
-    if (DATA.quotes) renderQuotes();
-    return;
-  }
   const pin = e.target.closest("[data-pin]");
   if (pin) { togglePin(pin.dataset.pin); return; }
   const un = e.target.closest("[data-unpin]");
@@ -211,7 +196,9 @@ document.addEventListener("click", e => {
   }
   const qm = e.target.closest("[data-qmode]");
   if (qm) { setQuizMode(qm.dataset.qmode); return; }
-  if (e.target.closest("[data-close]")) { closeDlg(); const s = srch(); if (s.open) s.close(); return; }
+  if (e.target.closest("[data-close]")) { const s = srch(); if (s.open) s.close(); return; }
+  /* backdrop click closes the search palette */
+  if (e.target === srch()) { srch().close(); return; }
   if (e.target.id === "newsRefresh") { refreshNews(); return; }
   const si = e.target.closest("[data-si]");
   if (si) {
@@ -248,7 +235,7 @@ function buildSearchIndex() {
 }
 function openSearch() {
   const s = srch();
-  s.innerHTML = `<div class="dl"><div class="s-in"><svg class="ico"><use href="#i-search"/></svg><input id="sq" type="text" placeholder="চাকরি, বই, পাঠ, খবর খুঁজুন…" aria-label="খুঁজুন"></div><div class="s-list" id="sResults"></div></div>`;
+  s.innerHTML = `<div class="dl">${xbtn()}<div class="s-in"><svg class="ico"><use href="#i-search"/></svg><input id="sq" type="text" placeholder="চাকরি, বই, পাঠ, খবর খুঁজুন…" aria-label="খুঁজুন"></div><div class="s-list" id="sResults"></div></div>`;
   if (!s.open) { try { s.showModal(); } catch { s.setAttribute("open", ""); } }
   drawSearch("");
   const inp = $("#sq");
@@ -343,7 +330,7 @@ function renderStreak() {
   for (let i = 6; i >= 0; i--) {
     const on = counts[6 - i] > 0;
     const label = i === 0 ? "আজ" : WDS[(dow - i + 7) % 7];
-    week += `<div${i === 0 && !on ? ' class="today"' : ""}><i${on ? "" : ' style="background:transparent;border:2.5px dashed var(--rose)"'}></i>${label}</div>`;
+    week += `<div class="${on ? "on" : "off"}"><i></i>${label}</div>`;
   }
   el.innerHTML = `<div class="streak">
 <div class="h2" style="margin:0">এই সপ্তাহের গতি</div>
@@ -799,7 +786,7 @@ function wireTimer() {
 let NTAB = "all";
 const NEWS_TONES = { bangladesh: "indigo", world: "sky", tech: "mint" };
 const NEWS_LABELS = { bangladesh: "বাংলাদেশ", world: "বিশ্ব", tech: "প্রযুক্তি ও AI" };
-function newsItem(it, key, flat) {
+function newsItem(it, flat) {
   const item = { id: pinId("খবর", it.title), type: "খবর", title: it.title, body: it.summary || "",
     meta: it.source + " · " + relTime(it.published), link: it.link };
   return `<div class="item"${flat ? ' style="margin-top:0"' : ""}><p>${esc(it.title)}</p>
@@ -824,7 +811,7 @@ function renderNews() {
   if (src) src.innerHTML = `<span class="muted" style="font-size:14px">সূত্র</span>` +
     sources.map(s => `<span class="chip indigo">${esc(s)}</span>`).join("") +
     `<button class="btn soft sm" id="newsRefresh">${ico("refresh")}হালনাগাদ করুন</button>`;
-  const tabDefs = [["all", "সব"], ["bangladesh", "বাংলাদেশ"], ["world", "বিশ্ব"], ["tech", "প্রযুক্তি"]];
+  const tabDefs = [["all", "সব"], ["bangladesh", "বাংলাদেশ"], ["world", "বিশ্ব"], ["tech", NEWS_LABELS.tech]];
   if (tabs) {
     tabs.innerHTML = tabDefs.map(([k, l]) =>
       `<button class="tab${NTAB === k ? " on" : ""}" data-ntab="${k}">${l}</button>`).join("");
@@ -838,12 +825,12 @@ function renderNews() {
       content.innerHTML = `<div class="news-g">` + ["bangladesh", "world", "tech"].map(k => `
 <div class="ncol t-${NEWS_TONES[k]}">
 <h2><svg class="ico"><use href="#i-${k === "tech" ? "spark" : "news"}"/></svg>${NEWS_LABELS[k]}<span class="chip cnt">${bn((n[k] || []).length)}টি</span></h2>
-${(n[k] || []).slice(0, 3).map(it => newsItem(it, k)).join("") || `<div class="item"><p>এই বিভাগে এখনো খবর নেই।</p></div>`}
+${(n[k] || []).slice(0, 3).map(it => newsItem(it)).join("") || `<div class="item"><p>এই বিভাগে এখনো খবর নেই।</p></div>`}
 </div>`).join("") + `</div>`;
     } else {
       const k = NTAB;
       content.innerHTML = `<div class="news-g one">` +
-        (n[k] || []).map(it => `<div class="ncol t-${NEWS_TONES[k]}" style="padding:14px">${newsItem(it, k, true)}</div>`).join("") +
+        (n[k] || []).map(it => `<div class="ncol t-${NEWS_TONES[k]}" style="padding:14px">${newsItem(it, true)}</div>`).join("") +
         `</div>`;
     }
   }
