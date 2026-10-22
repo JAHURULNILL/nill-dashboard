@@ -1241,6 +1241,15 @@
    "deadline": "2026-11-13",
    "link": "https://www.bdjobs.com/h/details/1545351?ln=1",
    "status": "applied"
+  },
+  {
+   "title": "Sales Executive - Desk Job",
+   "company": "Schengen Overseas Ltd",
+   "channel": "Bdjobs",
+   "date": "2026-10-22",
+   "deadline": "2026-11-20",
+   "link": "https://bdjobs.com/h/details/1547889",
+   "status": "applied"
   }
  ],
  "shortlist": [
@@ -1291,6 +1300,6 @@
  "counters": {
   "nextjobz_oct": 50,
   "shomvob_applied": 66,
-  "bdjobs_quota": "31/75"
+  "bdjobs_quota": "32/75"
  }
 }
