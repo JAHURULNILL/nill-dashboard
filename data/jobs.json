@@ -1088,6 +1088,78 @@
       "deadline": null,
       "link": "https://www.linkedin.com/jobs/view/4477256370",
       "status": "applied"
+    },
+    {
+      "title": "Customer Support Executive – E-commerce",
+      "company": "Parts Generation Limited",
+      "channel": "LinkedIn",
+      "date": "2026-10-21",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4480470435/",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Admin - Bulk Rice",
+      "company": "AKIJ Essentials Ltd. (via Akij Resources)",
+      "channel": "nextjobz",
+      "date": "2026-10-21",
+      "deadline": "2026-10-28",
+      "link": "https://nextjobz.com.bd/jobs/sales-admin-bulk-rice-akij-essentials-ltd-dhaka-IJOB202669808",
+      "status": "applied"
+    },
+    {
+      "title": "Front Desk Officer",
+      "company": "Walton Hi-tech industries Plc",
+      "channel": "nextjobz",
+      "date": "2026-10-21",
+      "deadline": "2026-10-27",
+      "link": "https://nextjobz.com.bd/jobs/front-desk-officer-dhaka-IJOB202669076",
+      "status": "applied"
+    },
+    {
+      "title": "Receptionist / Front Desk Executive",
+      "company": "Fashion Group (Fashion Eye Hospital & Institute)",
+      "channel": "nextjobz",
+      "date": "2026-10-21",
+      "deadline": "2026-10-30",
+      "link": "https://nextjobz.com.bd/jobs/receptionist-front-desk-executive-dhaka-IJOB202671647",
+      "status": "applied"
+    },
+    {
+      "title": "Junior Executive – Customer Support",
+      "company": "SAM-Online",
+      "channel": "Bdjobs",
+      "date": "2026-10-21",
+      "deadline": "2026-11-19",
+      "link": "https://bdjobs.com/h/details/1547755",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Service Executive (Facebook Support)",
+      "company": "A Leading E-commerce Support Company",
+      "channel": "Bdjobs",
+      "date": "2026-10-21",
+      "deadline": "2026-11-17",
+      "link": "https://bdjobs.com/h/details/1546529",
+      "status": "applied"
+    },
+    {
+      "title": "Tele Sales Executive",
+      "company": "Ananna tours and Travels",
+      "channel": "Shomvob",
+      "date": "2026-10-21",
+      "deadline": "2026-10-27",
+      "link": "https://app.shomvob.co/single-job-description/?id=25938",
+      "status": "applied"
+    },
+    {
+      "title": "Front Desk Executive",
+      "company": "Mahin Global Trader",
+      "channel": "Shomvob",
+      "date": "2026-10-21",
+      "deadline": "2026-10-28",
+      "link": "https://app.shomvob.co/single-job-description/?id=26077",
+      "status": "applied"
     }
   ],
   "shortlist": [
@@ -1124,8 +1196,8 @@
     }
   ],
   "counters": {
-    "nextjobz_oct": 44,
-    "shomvob_applied": 62,
-    "bdjobs_quota": "28/75"
+    "nextjobz_oct": 47,
+    "shomvob_applied": 64,
+    "bdjobs_quota": "29/75"
   }
 }
