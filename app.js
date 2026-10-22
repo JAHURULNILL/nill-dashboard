@@ -381,7 +381,7 @@ let selScope = "all";
 let selChannel = null;
 const jobKey = j => j.title + "|" + j.company + "|" + j.date;
 const jobStatus = j => statusOv[jobKey(j)] || j.status || "applied";
-const AV_COLORS = ["#4357E8", "#1BA383", "#D68A06", "#E2536F", "#2C97D3", "#7B4FD2"];
+const AV_COLORS = ["#0E9F8A", "#1BA383", "#D68A06", "#E2536F", "#2C97D3", "#7B4FD2"];
 function renderJobs() {
   const { jobs, shortlist, counters } = DATA.jobs;
   const stCount = {};
