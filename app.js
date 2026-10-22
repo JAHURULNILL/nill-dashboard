@@ -152,7 +152,6 @@ function refreshPinsUI() {
 const SECTIONS = [
   ["home", "i-home", "আজ"], ["jobs", "i-job", "চাকরি"], ["learn", "i-learn", "শেখা"],
   ["quotes", "i-book", "বই"], ["news", "i-news", "খবর"], ["facts", "i-spark", "বিস্ময়"],
-  ["pins", "i-pin", "পিন করা"],
 ];
 let currentPage = "home";
 function buildNav() {
