@@ -444,3 +444,9 @@ a.lk{display:inline-block;text-decoration:none}
 
 @media(max-width:1080px){.example-grid{grid-template-columns:1fr}}
 @media(max-width:900px){.nav-count,.live-dot{display:none}.tip-card{padding:16px}}
+
+/* ---------- perf: phones skip live backdrop blur on repeated cards (their own
+   translucent gradient backgrounds stay, so the glass look is unchanged) ---------- */
+@media(max-width:900px){
+  .card,.topic,.ncol,.fact,.tip-card{-webkit-backdrop-filter:none;backdrop-filter:none}
+}

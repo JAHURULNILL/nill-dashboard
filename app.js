@@ -130,8 +130,8 @@ function togglePin(id) {
   else pins.push({ ...it, pinned_date: fmtDate(dhakaNow()) });
   save("nill_pins", pins);
   refreshPinsUI();
-  if (DATA.quotes) renderQuotes();
-  if (DATA.news) renderNews();
+  if (RENDERED.has("quotes")) renderQuotes();
+  if (RENDERED.has("news")) renderNews();
   showToast(was ? "পিন সরানো হয়েছে" : "পিন করা হয়েছে");
 }
 function pinBtn(item) {
@@ -147,7 +147,7 @@ function refreshPinsUI() {
   $$(".pinCount").forEach(el => { el.textContent = bn(pins.length); });
   const sp = $("#statPinCount");
   if (sp) sp.textContent = bn(pins.length) + "টি";
-  renderPins();
+  if (RENDERED.has("pins")) renderPins();
 }
 
 /* navigation */
@@ -167,7 +167,55 @@ function buildNav() {
     return `<a href="#" data-nav="${id}"${id === currentPage ? ' class="on" aria-current="page"' : ""}><svg class="ico"><use href="#${icon}"/></svg>${label}${extra}</a>`;
   }).join("");
 }
+/* lazy page rendering — a page renders on its first visit, not all at boot (perf) */
+const RENDERED = new Set(["home"]);
+const PAGE_RENDER = {
+  jobs: () => { if (DATA.jobs) renderJobs(); },
+  learn: () => { if (DATA.quiz) renderLearn(); },
+  quotes: () => { if (DATA.quotes) renderQuotes(); },
+  news: () => { if (DATA.news) renderNews(); },
+  facts: () => { if (DATA.facts) renderFacts(); },
+  growth: () => { if (DATA.growth) renderGrowth(); },
+  pins: () => renderPins(),
+};
+const PAGE_DATA = { quotes: "quotes", learn: "quiz", growth: "growth" };
+function renderOnce(page) {
+  if (RENDERED.has(page)) return;
+  const key = PAGE_DATA[page];
+  if (key && !DATA[key]) { whenData(key).then(v => { if (v) renderOnce(page); }); return; }
+  RENDERED.add(page);
+  const fn = PAGE_RENDER[page];
+  if (fn) fn();
+}
+/* deferred data — quotes/quiz/growth arrive after first paint */
+const DATA_WAITERS = {};
+function whenData(key) {
+  if (DATA[key]) return Promise.resolve(DATA[key]);
+  return new Promise(res => { (DATA_WAITERS[key] = DATA_WAITERS[key] || []).push(res); });
+}
+function setData(key, val) {
+  DATA[key] = val;
+  (DATA_WAITERS[key] || []).splice(0).forEach(res => res(val));
+}
+async function loadRest() {
+  const specs = [["quotes", "data/quotes.json"], ["quiz", "data/quiz.json"], ["growth", "data/growth.json"]];
+  let failed = false;
+  await Promise.all(specs.map(async ([key, url]) => {
+    let v = await getJSON(url);
+    if (!v) v = await getJSON(url);
+    if (!v) { failed = true; return; }
+    setData(key, v);
+  }));
+  if (DATA.quotes) todayQuotes = QUOTE_CATS.flatMap(cat => dailyPick(DATA.quotes.filter(q => q.category === cat), 2, "quote:" + cat));
+  if (DATA.growth) todayTips = dailyPick(DATA.growth.tips, 10, "tips");
+  buildSearchIndex();
+  if (failed) {
+    $("main").insertAdjacentHTML("afterbegin",
+      `<div class="err-box">কিছু তথ্য লোড হয়নি — ইন্টারনেট সংযোগ দেখে পেজটি রিফ্রেশ করো।</div>`);
+  }
+}
 function go(page) {
+  renderOnce(page);
   currentPage = page;
   $$(".page").forEach(p => p.classList.toggle("on", p.id === "page-" + page));
   buildNav();
@@ -235,6 +283,7 @@ function buildSearchIndex() {
   SEARCH_INDEX = idx;
 }
 function openSearch() {
+  if (!SEARCH_INDEX.length && DATA.quotes && DATA.quiz && DATA.growth) buildSearchIndex();
   const s = srch();
   s.innerHTML = `<div class="dl">${xbtn()}<div class="s-in"><svg class="ico"><use href="#i-search"/></svg><input id="sq" type="text" placeholder="চাকরি, বই, পাঠ, খবর খুঁজুন…" aria-label="খুঁজুন"></div><div class="s-list" id="sResults"></div></div>`;
   if (!s.open) { try { s.showModal(); } catch { s.setAttribute("open", ""); } }
@@ -942,24 +991,23 @@ ${p.body ? `<p class="p-body">${esc(p.body)}</p>` : ""}
   wireTimer();
   renderDayProgress();
   setInterval(renderDayProgress, 60000);
-  const [jobs, quotes, quiz, facts, growth, news, inspiration] = await Promise.all([
-    getJSON("data/jobs.json"), getJSON("data/quotes.json"), getJSON("data/quiz.json"),
-    getJSON("data/facts.json"), getJSON("data/growth.json"), getJSON("data/news.json"),
-    getJSON("data/inspiration.json"),
+  /* phase 1 — only what the home page needs, so first paint stays light */
+  const [jobs, facts, news, inspiration, routineData] = await Promise.all([
+    getJSON("data/jobs.json"), getJSON("data/facts.json"), getJSON("data/news.json"),
+    getJSON("data/inspiration.json"), getJSON("data/routine.json"),
   ]);
-  DATA = { jobs, quotes, quiz, facts, growth, news, inspiration };
+  DATA.jobs = jobs; DATA.facts = facts; DATA.news = news; DATA.inspiration = inspiration;
   showInspo(false);
-  if (!jobs || !quotes || !quiz || !facts || !growth) {
+  if (!jobs || !facts) {
     $("main").insertAdjacentHTML("afterbegin",
       `<div class="err-box">কিছু তথ্য লোড হয়নি — ইন্টারনেট সংযোগ দেখে পেজটি রিফ্রেশ করো।</div>`);
   }
-  if (jobs) { renderJobs(); renderHomeChips(); renderStreak(); }
-  if (quiz) renderLearn();
-  if (quotes) renderQuotes();
-  if (facts) renderFacts();
-  if (growth) { renderGrowth(); renderRoutine($("#routineHome"), growth.routine); }
-  renderNews();
+  if (jobs) { renderHomeChips(); renderStreak(); }
+  if (facts) { renderFacts(); RENDERED.add("facts"); }
+  if (routineData) renderRoutine($("#routineHome"), routineData.routine);
+  if (news) renderHomeNews();
   buildNav();
-  buildSearchIndex();
   refreshPinsUI();
+  /* phase 2 — quotes/quiz/growth load in the background */
+  loadRest();
 })();
