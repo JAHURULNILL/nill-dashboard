@@ -130,6 +130,8 @@ function togglePin(id) {
   else pins.push({ ...it, pinned_date: fmtDate(dhakaNow()) });
   save("nill_pins", pins);
   refreshPinsUI();
+  if (DATA.quotes) renderQuotes();
+  if (DATA.news) renderNews();
   showToast(was ? "পিন সরানো হয়েছে" : "পিন করা হয়েছে");
 }
 function pinBtn(item) {
@@ -654,12 +656,40 @@ function renderQuotes() {
   todayQuotes = QUOTE_CATS.flatMap(cat =>
     dailyPick(DATA.quotes.filter(q => q.category === cat), 2, "quote:" + cat));
   todayQuotes.forEach(q => { const it = quoteItem(q); PIN_ITEMS[it.id] = it; });
-  $("#quoteFilters").innerHTML = ["সব", ...QUOTE_CATS].map(c =>
-    `<button class="tab${quoteFilter === c ? " on" : ""}" data-qf="${esc(c)}">${esc(c)}</button>`).join("");
+  const pinCountQ = pins.filter(p => p.type === "উক্তি").length;
+  $("#quoteFilters").innerHTML = ["সব", ...QUOTE_CATS, "__pinned"].map(c =>
+    `<button class="tab${quoteFilter === c ? " on" : ""}" data-qf="${esc(c)}">${c === "__pinned" ? "পিন করা" + (pinCountQ ? " · " + bn(pinCountQ) + "টি" : "") : esc(c)}</button>`).join("");
   $("#quoteFilters").onclick = e => {
     const b = e.target.closest("[data-qf]");
     if (b) { quoteFilter = b.dataset.qf; renderQuotes(); }
   };
+  if (quoteFilter === "__pinned") {
+    const pinnedQ = pins.filter(p => p.type === "উক্তি");
+    if (!pinnedQ.length) {
+      $("#quoteList").innerHTML = `<div class="card"><div class="empty">এখনো কোনো উক্তি পিন করোনি।<br>পছন্দের উক্তির 📌 বাটনে চাপ দিলে এখানে জমা হবে।</div></div>`;
+      return;
+    }
+    const byId = {};
+    DATA.quotes.forEach(q => { byId[pinId("উক্তি", q.text)] = q; });
+    $("#quoteList").innerHTML = `<div class="quotes-list">` + pinnedQ.map(p => {
+      const q = byId[p.id];
+      if (q) {
+        const it = quoteItem(q);
+        return `<article class="lq">
+<p class="lq-text">${esc(q.text)}</p>
+${q.text_bn ? `<p class="lq-tr">${esc(q.text_bn)}</p>` : ""}
+<div class="lq-foot"><span class="lq-meta">${esc(q.author)} · ${esc(bookShort(q.book))}</span>${pinBtn(it)}</div>
+</article>`;
+      }
+      PIN_ITEMS[p.id] = p;
+      return `<article class="lq">
+<p class="lq-text">${esc(p.title)}</p>
+${p.body ? `<p class="lq-tr">${esc(p.body)}</p>` : ""}
+<div class="lq-foot"><span class="lq-meta">${esc(p.meta)}</span>${pinBtn(p)}</div>
+</article>`;
+    }).join("") + `</div>`;
+    return;
+  }
   const cats = QUOTE_CATS.filter(c => quoteFilter === "সব" || c === quoteFilter);
   $("#quoteList").innerHTML = cats.map(cat => {
     const list = todayQuotes.filter(q => q.category === cat);
@@ -810,7 +840,8 @@ function renderNews() {
   if (src) src.innerHTML = `<span class="muted" style="font-size:14px">সূত্র</span>` +
     sources.map(s => `<span class="chip indigo">${esc(s)}</span>`).join("") +
     `<button class="btn soft sm" id="newsRefresh">${ico("refresh")}হালনাগাদ করুন</button>`;
-  const tabDefs = [["all", "সব"], ["bangladesh", "বাংলাদেশ"], ["world", "বিশ্ব"], ["tech", NEWS_LABELS.tech]];
+  const pinCountN = pins.filter(p => p.type === "খবর").length;
+  const tabDefs = [["all", "সব"], ["bangladesh", "বাংলাদেশ"], ["world", "বিশ্ব"], ["tech", NEWS_LABELS.tech], ["pinned", "পিন করা" + (pinCountN ? " · " + bn(pinCountN) + "টি" : "")]];
   if (tabs) {
     tabs.innerHTML = tabDefs.map(([k, l]) =>
       `<button class="tab${NTAB === k ? " on" : ""}" data-ntab="${k}">${l}</button>`).join("");
@@ -826,6 +857,20 @@ function renderNews() {
 <h2><svg class="ico"><use href="#i-${k === "tech" ? "spark" : "news"}"/></svg>${NEWS_LABELS[k]}<span class="chip cnt">${bn((n[k] || []).length)}টি</span></h2>
 ${(n[k] || []).slice(0, 3).map(it => newsItem(it)).join("") || `<div class="item"><p>এই বিভাগে এখনো খবর নেই।</p></div>`}
 </div>`).join("") + `</div>`;
+    } else if (NTAB === "pinned") {
+      const pinnedN = pins.filter(p => p.type === "খবর");
+      if (!pinnedN.length) {
+        content.innerHTML = `<div class="card"><div class="empty">এখনো কোনো খবর পিন করোনি।<br>খবরের কার্ডের 📌 বাটনে চাপ দিলে এখানে জমা হবে।</div></div>`;
+      } else {
+        content.innerHTML = `<div class="news-g one">` + pinnedN.map(p => {
+          PIN_ITEMS[p.id] = p;
+          const srcName = (p.meta || "").split(" · ")[0] || "খবর";
+          return `<div class="ncol t-indigo" style="padding:14px"><div class="item" style="margin-top:0"><p>${esc(p.title)}</p>
+${p.body ? `<span class="sm">${esc(p.body)}</span>` : ""}
+<div class="item-meta"><span class="chip">${esc(srcName)}</span><span class="tm">পিন করা: ${esc(p.pinned_date || "")}</span>${p.link ? `<a class="lk" href="${esc(p.link)}" target="_blank" rel="noopener">সূত্রে পড়ুন</a>` : ""}${pinBtn(p)}</div>
+</div></div>`;
+        }).join("") + `</div>`;
+      }
     } else {
       const k = NTAB;
       content.innerHTML = `<div class="news-g one">` +
