@@ -1259,6 +1259,78 @@
       "deadline": "06 Nov 2026",
       "link": "https://bdjobs.com/h/details/1542418",
       "status": "applied"
+    },
+    {
+      "title": "Sales Representative (SR)",
+      "company": "Bruvana Beverages Limited",
+      "channel": "LinkedIn",
+      "date": "2026-10-23",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4473723390/",
+      "status": "applied"
+    },
+    {
+      "title": "Tele Sales & Lead Qualification",
+      "company": "eduaid - Immigration Services",
+      "channel": "LinkedIn",
+      "date": "2026-10-23",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4479844536/",
+      "status": "applied"
+    },
+    {
+      "title": "SALES ASSOCIATE",
+      "company": "a well-known international footwear brand",
+      "channel": "LinkedIn",
+      "date": "2026-10-23",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4481393514/",
+      "status": "applied"
+    },
+    {
+      "title": "Executive - Front Desk And Admin",
+      "company": "Rupayan Group",
+      "channel": "nextjobz",
+      "date": "2026-10-23",
+      "deadline": "2026-11-06",
+      "link": "https://nextjobz.com.bd/jobs/executive-front-desk-and-admin-dhaka-mohakhali-IJOB202672607",
+      "status": "applied"
+    },
+    {
+      "title": "Front Desk Executive - Receptionist",
+      "company": "Anondo Housing Society",
+      "channel": "nextjobz",
+      "date": "2026-10-23",
+      "deadline": "2026-11-12",
+      "link": "https://nextjobz.com.bd/jobs/front-desk-executive-receptionist-dhaka-motijheel-IJOB202675062",
+      "status": "applied"
+    },
+    {
+      "title": "Data Entry Operator (Mirpur Branch)",
+      "company": "Golden Harvest InfoTech",
+      "channel": "nextjobz",
+      "date": "2026-10-23",
+      "deadline": "2026-10-24",
+      "link": "https://nextjobz.com.bd/jobs/data-entry-operator-mirpur-branch-dhaka-mirpur-sylhet-sylhet-sadar-tangail-dhanbari-IJOB202666954",
+      "status": "applied"
+    },
+    {
+      "title": "Computer Operator / Data Entry Operator",
+      "company": "Asia Continental Group (BD)",
+      "channel": "nextjobz",
+      "date": "2026-10-23",
+      "deadline": "2026-11-15",
+      "link": "https://nextjobz.com.bd/jobs/computer-operator-data-entry-operator-dhaka-uttara-IJOB202676069",
+      "status": "applied"
+    },
+    {
+      "title": "Data Entry / IT Operator",
+      "company": "Rangpur Dairy and Food Products Limited",
+      "channel": "nextjobz",
+      "date": "2026-10-23",
+      "deadline": "2026-10-30",
+      "link": "https://nextjobz.com.bd/jobs/data-entry-it-operator-dhaka-IJOB202671594",
+      "status": "applied"
     }
   ],
   "shortlist": [
@@ -1307,7 +1379,7 @@
     }
   ],
   "counters": {
-    "nextjobz_oct": 50,
+    "nextjobz_oct": 55,
     "shomvob_applied": 66,
     "bdjobs_quota": "32/75"
   }
