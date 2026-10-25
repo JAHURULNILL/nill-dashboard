@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#F2F8F6">
+<meta name="theme-color" content="#F5F7FB">
 <title>আমার দিন — নীলের ব্যক্তিগত ড্যাশবোর্ড</title>
 <meta name="description" content="চাকরি, শেখা, বই, খবর আর প্রতিদিনের উন্নতি — সবকিছু এক জায়গায়।">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,9 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="aurora-dashboard">
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
     <symbol id="i-job" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0110.5 4h3A1.5 1.5 0 0115 5.5V7"/><path d="M3 13h18"/></symbol>
@@ -30,191 +30,482 @@
   </defs>
 </svg>
 
+<div class="aurora-backdrop" aria-hidden="true">
+  <span class="aurora-orb orb-mint"></span>
+  <span class="aurora-orb orb-lilac"></span>
+  <span class="aurora-orb orb-peach"></span>
+  <span class="aurora-grain"></span>
+</div>
+
 <div class="app">
   <aside class="side">
-    <a class="brand" href="#" data-nav="home" aria-label="আমার দিন">
-      <div class="brand-mark"><span>দি</span></div>
-      <b>আমার দিন</b>
-    </a>
-    <button class="sbtn" data-search aria-label="খুঁজুন"><svg class="ico"><use href="#i-search"/></svg>খুঁজুন<kbd>Ctrl K</kbd></button>
+    <div class="side-head">
+      <a class="brand" href="#" data-nav="home" aria-label="আমার দিন">
+        <div class="brand-mark"><span>দি</span></div>
+        <b>আমার দিন</b>
+      </a>
+      <button class="sbtn side-search" type="button" data-search aria-label="খুঁজুন">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+        <span>খুঁজুন</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+    </div>
+
+    <div class="side-rule" aria-hidden="true"></div>
     <nav class="nav" id="sideNav" aria-label="প্রধান মেনু"></nav>
-    <div class="side-foot"><b>ছোট ছোট ধাপ</b>প্রতিদিন একটু একটু করে এগোলেই বড় পরিবর্তন আসে।</div>
+
+    <div class="side-foot">
+      <span class="side-foot-mark" aria-hidden="true">
+        <svg class="ico" focusable="false"><use href="#i-up"/></svg>
+      </span>
+      <div class="side-foot-copy">
+        <b>ছোট ছোট ধাপ</b>
+        <p>প্রতিদিন একটু একটু করে এগোলেই বড় পরিবর্তন আসে।</p>
+      </div>
+    </div>
   </aside>
 
-  <main>
+  <main class="workspace">
     <div class="topbar">
-      <a class="brand" href="#" data-nav="home" aria-label="আমার দিন"><div class="brand-mark"><span>দি</span></div><b>আমার দিন</b></a>
-      <button class="iconbtn" data-search aria-label="খুঁজুন"><svg class="ico"><use href="#i-search"/></svg></button>
+      <a class="brand" href="#" data-nav="home" aria-label="আমার দিন">
+        <div class="brand-mark"><span>দি</span></div>
+        <b>আমার দিন</b>
+      </a>
+      <button class="iconbtn" type="button" data-search aria-label="খুঁজুন">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+      </button>
     </div>
 
     <!-- ১. আজ (হোম) -->
     <section class="page on" id="page-home">
-      <div class="grid12">
-        <div class="card tint t-gold s8"><div class="hero">
-          <div class="hero-top">
-            <h1 id="heroGreeting">আসসালামু আলাইকুম, নীল</h1>
-            <p class="date" id="heroDate">আজকের দিন</p>
+      <div class="page-frame home-frame">
+        <div class="home-overview">
+          <header class="card glass-card hero hero-aurora">
+            <div class="hero-art" aria-hidden="true">
+              <span class="hero-glow"></span>
+              <span class="hero-orbit orbit-outer"></span>
+              <span class="hero-orbit orbit-inner"></span>
+              <span class="hero-orbit-node"></span>
+              <svg class="ico hero-spark" focusable="false"><use href="#i-spark"/></svg>
+            </div>
+            <div class="hero-top">
+              <div class="hero-eyebrow">
+                <span class="hero-status-dot" aria-hidden="true"></span>
+                <p class="date" id="heroDate">আজকের দিন</p>
+              </div>
+              <h1 id="heroGreeting">আসসালামু আলাইকুম, নীল</h1>
+            </div>
+            <div class="hero-inspiration-panel">
+              <span class="inspiration-mark" aria-hidden="true">
+                <svg class="ico" focusable="false"><use href="#i-spark"/></svg>
+              </span>
+              <div class="hero-inspo" id="heroInspo" aria-live="polite">
+                <p class="muted">প্রেরণা লোড হচ্ছে…</p>
+              </div>
+            </div>
+          </header>
+
+          <div class="card tint t-rose hero-streak" id="streakCard">
+            <div class="streak">
+              <h2 class="h2">এই সপ্তাহের গতি</h2>
+              <div class="big">
+                <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flame"/></svg>
+                <b>…</b>
+              </div>
+              <p class="muted">তথ্য লোড হচ্ছে…</p>
+              <div class="week"></div>
+            </div>
           </div>
-          <div class="hero-inspo" id="heroInspo" aria-live="polite"><p class="muted" style="font-size:14px">প্রেরণা লোড হচ্ছে…</p></div>
-        </div></div>
+        </div>
 
-        <div class="card tint t-rose s4" id="streakCard">
-          <div class="streak">
-            <div class="h2" style="margin:0">এই সপ্তাহের গতি</div>
-            <div class="big"><svg class="ico"><use href="#i-flame"/></svg><b>…</b></div>
-            <p style="font-size:14.5px;color:#7d3347">তথ্য লোড হচ্ছে…</p>
-            <div class="week"></div>
+        <div class="bento-grid">
+          <div class="card glass-card bento-routine">
+            <header class="card-head">
+              <div class="card-heading">
+                <span class="tile-icon icon-indigo" aria-hidden="true">
+                  <svg class="ico" focusable="false"><use href="#i-up"/></svg>
+                </span>
+                <h2 class="h2">আজকের রুটিন</h2>
+              </div>
+              <a href="#" class="chip indigo" data-nav="growth">
+                পুরোটা দেখো
+                <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
+              </a>
+            </header>
+            <div class="routine-progress">
+              <div class="daily-progress-head">
+                <strong>দিনের গতিপথ</strong>
+                <span id="dayProgressLabel"></span>
+              </div>
+              <div class="bar bar-indigo"><i id="dayProgressFill" style="width:0%"></i></div>
+            </div>
+            <div class="routine-list" id="routineHome"></div>
+          </div>
+
+          <div class="bento-actions">
+            <a href="#" class="card link tint t-sky bento-job" data-nav="jobs">
+              <div class="card-head">
+                <div class="card-heading">
+                  <span class="tile-icon icon-sky" aria-hidden="true">
+                    <svg class="ico" focusable="false"><use href="#i-job"/></svg>
+                  </span>
+                  <h2 class="h2">আমার চাকরি</h2>
+                </div>
+                <svg class="ico card-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
+              </div>
+              <div class="mini-stats" id="jobMiniStats">
+                <div><b>…</b><span>আবেদন</span></div>
+                <div><b>…</b><span>ইন্টারভিউ</span></div>
+              </div>
+              <div class="card-foot">
+                <div class="bar bar-sky"><i id="jobMiniBar" style="width:0%"></i></div>
+                <p class="mini-note" id="jobMiniNote">লোড হচ্ছে…</p>
+              </div>
+            </a>
+
+            <a href="#" class="card link tint t-mint bento-learn" data-nav="learn">
+              <div class="card-head">
+                <div class="card-heading">
+                  <span class="tile-icon icon-mint" aria-hidden="true">
+                    <svg class="ico" focusable="false"><use href="#i-learn"/></svg>
+                  </span>
+                  <h2 class="h2">শেখা চলছে</h2>
+                </div>
+                <svg class="ico card-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
+              </div>
+              <div class="lesson-preview">
+                <p class="lesson-name">MS Word</p>
+                <p class="lesson-next" id="learnNext">পরের পাঠ লোড হচ্ছে…</p>
+              </div>
+              <div class="card-foot">
+                <div class="bar bar-mint"><i id="learnBar" style="width:0%"></i></div>
+                <div class="row between lesson-progress-meta">
+                  <span id="learnPct">…</span>
+                  <span class="chip mint">MCQ অনুশীলন</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="card glass-card bento-news">
+            <header class="card-head">
+              <div class="card-heading">
+                <span class="tile-icon icon-indigo" aria-hidden="true">
+                  <svg class="ico" focusable="false"><use href="#i-news"/></svg>
+                </span>
+                <h2 class="h2">আজকের খবর</h2>
+              </div>
+              <a href="#" class="chip indigo" data-nav="news">
+                সব খবর
+                <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
+              </a>
+            </header>
+            <div class="news-preview" id="homeNews">
+              <div class="skel-row"></div>
+              <div class="skel-row"></div>
+              <div class="skel-row"></div>
+            </div>
+          </div>
+
+          <div class="card tint t-indigo bento-fact" id="homeFact">
+            <h2 class="h2">আজকের একটি বিস্ময়</h2>
+            <p class="muted">তথ্য লোড হচ্ছে…</p>
           </div>
         </div>
-
-        <a href="#" class="card link tint t-sky s4" data-nav="jobs">
-          <div class="h2">আমার চাকরি</div>
-          <div class="mini-stats" id="jobMiniStats"><div><b>…</b><span>আবেদন</span></div><div><b>…</b><span>ইন্টারভিউ</span></div></div>
-          <div class="bar"><i id="jobMiniBar" style="width:0%;background:var(--sky-d)"></i></div>
-          <p id="jobMiniNote" style="font-size:14px;margin-top:8px;color:var(--sky-d)">লোড হচ্ছে…</p>
-        </a>
-
-        <a href="#" class="card link tint t-mint s4" data-nav="learn">
-          <div class="h2">শেখা চলছে</div>
-          <p style="font-weight:600">MS Word</p>
-          <p id="learnNext" style="font-size:14px;margin-bottom:14px;color:#0f6b55">পরের পাঠ লোড হচ্ছে…</p>
-          <div class="bar"><i id="learnBar" style="width:0%;background:var(--mint-d)"></i></div>
-          <div class="row between" style="margin-top:12px"><span id="learnPct" style="font-size:14px;color:#0f6b55">…</span><span class="chip mint">MCQ অনুশীলন</span></div>
-        </a>
-
-        <div class="card s7">
-          <div class="row between"><div class="h2" style="margin:0">আজকের খবর</div><a href="#" class="chip indigo" data-nav="news">সব খবর</a></div>
-          <div id="homeNews" style="margin-top:10px">
-            <div class="skel-row"></div><div class="skel-row"></div><div class="skel-row"></div>
-          </div>
-        </div>
-
-        <div class="card tint t-indigo s5" id="homeFact">
-          <div class="h2">আজকের একটি বিস্ময়</div>
-          <p class="muted" style="font-size:14.5px">তথ্য লোড হচ্ছে…</p>
-        </div>
-
-        <div class="card s7">
-          <div class="row between"><div class="h2" style="margin:0">আজকের রুটিন</div><a href="#" class="chip indigo" data-nav="growth">পুরোটা দেখো</a></div>
-          <div class="daily-progress-head"><strong>দিনের গতিপথ</strong><span id="dayProgressLabel"></span></div>
-          <div class="bar"><i id="dayProgressFill" style="width:0%"></i></div>
-          <div id="routineHome"></div>
-        </div>
-
       </div>
     </section>
 
     <!-- ২. চাকরি -->
     <section class="page" id="page-jobs">
-      <div class="ph"><h1>আমার চাকরির খোঁজ</h1></div>
-      <div class="card" style="margin-bottom:16px"><div class="goal" id="goalBox"></div></div>
-      <div id="shortlistBox" style="margin-bottom:16px"></div>
-      <div class="card">
-        <div class="h2">হিসাব এক নজরে</div>
-        <div class="funnel" id="jobFunnel" style="margin:4px 0 14px"></div>
-        <div id="jobChannels"></div>
-        <div id="jobResults"></div>
-        <p class="fine" id="jobPortalNote" style="margin-top:16px"></p>
+      <div class="page-frame">
+        <header class="ph page-header jobs-header">
+          <span class="page-emblem emblem-sky" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-job"/></svg>
+          </span>
+          <div class="page-heading">
+            <h1>আমার চাকরির খোঁজ</h1>
+          </div>
+          <span class="header-rule" aria-hidden="true"></span>
+        </header>
+
+        <div class="jobs-workspace">
+          <div class="card glass-card job-goal">
+            <div class="goal" id="goalBox"></div>
+          </div>
+
+          <div class="jobs-board">
+            <div class="job-shortlist" id="shortlistBox"></div>
+
+            <aside class="card glass-card job-insights">
+              <header class="card-head">
+                <div class="card-heading">
+                  <span class="tile-icon icon-sky" aria-hidden="true">
+                    <svg class="ico" focusable="false"><use href="#i-up"/></svg>
+                  </span>
+                  <h2 class="h2">হিসাব এক নজরে</h2>
+                </div>
+              </header>
+              <div class="funnel" id="jobFunnel"></div>
+              <div class="job-detail-grid">
+                <div class="job-channels" id="jobChannels"></div>
+                <div class="job-results" id="jobResults"></div>
+              </div>
+              <p class="fine job-portal-note" id="jobPortalNote"></p>
+            </aside>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ৩. শেখা -->
     <section class="page" id="page-learn">
-      <div class="ph"><h1>আজ কী শিখব</h1><p>পাঠ শেষ করো, তারপর প্রশ্নে নিজেকে যাচাই করো। যেখানে আছ, সেখান থেকেই শুরু।</p></div>
-      <div class="topics">
-        <div class="topic t-indigo on"><b>MS Word</b><div class="bar"><i id="topicWordBar" style="width:0%"></i></div><span class="muted" id="topicWordPct" style="font-size:14px">লোড হচ্ছে…</span></div>
-        <div class="topic t-mint lock"><b>MS Excel</b><div class="bar"><i style="width:0%"></i></div><span class="muted" style="font-size:14px">শীঘ্রই আসছে — Word শেষ হলে শুরু</span></div>
-      </div>
-      <div class="learn-g">
-        <div class="card">
-          <div class="h2">MS Word-এর পথ</div>
-          <div class="path" id="wordTopics"></div>
-          <div class="path-foot">
-            <div class="bar"><i id="wordBar" style="width:0%"></i></div>
-            <div class="row between"><span class="muted" style="font-size:14px" id="wordProgText">লোড হচ্ছে…</span><span class="chip indigo">মোট ১৪টি পাঠ</span></div>
+      <div class="page-frame">
+        <header class="ph page-header learn-header">
+          <span class="page-emblem emblem-mint" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-learn"/></svg>
+          </span>
+          <div class="page-heading">
+            <h1>আজ কী শিখব</h1>
+            <p>পাঠ শেষ করো, তারপর প্রশ্নে নিজেকে যাচাই করো। যেখানে আছ, সেখান থেকেই শুরু।</p>
+          </div>
+          <span class="header-rule" aria-hidden="true"></span>
+        </header>
+
+        <div class="topics topic-switchboard">
+          <div class="topic t-indigo on">
+            <b>MS Word</b>
+            <div class="bar"><i id="topicWordBar" style="width:0%"></i></div>
+            <span class="muted" id="topicWordPct">লোড হচ্ছে…</span>
+          </div>
+          <div class="topic t-mint lock">
+            <b>MS Excel</b>
+            <div class="bar"><i style="width:0%"></i></div>
+            <span class="muted">শীঘ্রই আসছে — Word শেষ হলে শুরু</span>
           </div>
         </div>
-        <div class="card">
-          <div class="quiz-top">
-            <div class="modes">
-              <button data-qmode="current">চলতি পাঠ</button>
-              <button class="on" data-qmode="random">এলোমেলো প্র্যাকটিস</button>
+
+        <div class="learn-g learning-studio">
+          <div class="card glass-card curriculum-panel">
+            <header class="card-head">
+              <div class="card-heading">
+                <span class="tile-icon icon-indigo" aria-hidden="true">
+                  <svg class="ico" focusable="false"><use href="#i-learn"/></svg>
+                </span>
+                <h2 class="h2">MS Word-এর পথ</h2>
+              </div>
+            </header>
+            <div class="path" id="wordTopics"></div>
+            <div class="path-foot">
+              <div class="bar"><i id="wordBar" style="width:0%"></i></div>
+              <div class="row between path-progress-meta">
+                <span class="muted" id="wordProgText">লোড হচ্ছে…</span>
+                <span class="chip indigo">মোট ১৪টি পাঠ</span>
+              </div>
             </div>
-            <div class="row" id="quizStats"></div>
           </div>
-          <div class="tip" id="quizTip">পাঠ লোড হচ্ছে…</div>
-          <div id="quizBox">
-            <p class="muted" style="font-size:14.5px;margin-bottom:14px">শেখা টপিকগুলো থেকে প্রশ্ন আসবে। ভুল হলেও চিন্তা নেই — প্রতিটার ব্যাখ্যা দেওয়া আছে।</p>
-            <button class="btn indigo" id="quizStart">অনুশীলন শুরু করো</button>
+
+          <div class="card glass-card practice-panel">
+            <div class="quiz-top">
+              <div class="modes segmented-control">
+                <button type="button" data-qmode="current">চলতি পাঠ</button>
+                <button type="button" class="on" data-qmode="random">এলোমেলো প্র্যাকটিস</button>
+              </div>
+              <div class="row quiz-stats" id="quizStats"></div>
+            </div>
+            <div class="practice-body">
+              <div class="tip" id="quizTip">পাঠ লোড হচ্ছে…</div>
+              <div id="quizBox">
+                <p class="muted quiz-intro">শেখা টপিকগুলো থেকে প্রশ্ন আসবে। ভুল হলেও চিন্তা নেই — প্রতিটার ব্যাখ্যা দেওয়া আছে।</p>
+                <button class="btn indigo" type="button" id="quizStart">অনুশীলন শুরু করো</button>
+              </div>
+            </div>
           </div>
         </div>
+
+        <div class="card tint t-plum coming-soon-banner">
+          <span class="coming-soon-mark" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-learn"/></svg>
+          </span>
+          <div class="coming-soon-copy">
+            <h2 class="h2">MS Excel — শীঘ্রই আসছে</h2>
+            <p>Excel পাঠ এখনো শুরু হয়নি — Word শেষ হলেই Excel শেখা শুরু হবে। ততদিন Word-এর ভিতটা পাকা করো।</p>
+          </div>
+        </div>
+
+        <div class="example-gallery">
+          <header class="ph section-heading">
+            <div class="page-heading">
+              <h2>ছবিসহ উদাহরণ</h2>
+              <p>প্রতিটা নিয়ম Word-এর ভেতর কেমন দেখায়, তা দেখে শেখো।</p>
+            </div>
+            <span class="header-rule" aria-hidden="true"></span>
+          </header>
+          <div class="example-grid" id="exampleGrid"></div>
+        </div>
       </div>
-      <div class="card tint t-plum" style="margin-top:16px">
-        <div class="h2">MS Excel — শীঘ্রই আসছে</div>
-        <p style="font-size:14.5px;color:#4a3185">Excel পাঠ এখনো শুরু হয়নি — Word শেষ হলেই Excel শেখা শুরু হবে। ততদিন Word-এর ভিতটা পাকা করো।</p>
-      </div>
-      <div class="ph" style="margin-top:30px"><h1 style="font-size:26px">ছবিসহ উদাহরণ</h1><p>প্রতিটা নিয়ম Word-এর ভেতর কেমন দেখায়, তা দেখে শেখো।</p></div>
-      <div class="example-grid" id="exampleGrid"></div>
     </section>
 
     <!-- ৪. বই (উক্তি) -->
     <section class="page" id="page-quotes">
-      <div class="ph"><h1>যে বইগুলো জীবন বদলায়</h1><p>বিশ্বের সেরা বইয়ের সেরা কথা — প্রতিদিন নতুন ১০টি করে, বইয়ের তাকে সাজানো। বইয়ে চাপ দিলে পুরো উক্তি খুলবে — যেটা মনে ধরবে, পিন করে রেখে দাও।</p></div>
-      <div class="tabs" id="quoteFilters"></div>
-      <div id="quoteList"></div>
+      <div class="page-frame">
+        <header class="ph page-header quotes-header">
+          <span class="page-emblem emblem-plum" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-book"/></svg>
+          </span>
+          <div class="page-heading">
+            <h1>যে বইগুলো জীবন বদলায়</h1>
+            <p>বিশ্বের সেরা বইয়ের সেরা কথা — প্রতিদিন নতুন ১০টি করে, বইয়ের তাকে সাজানো। বইয়ে চাপ দিলে পুরো উক্তি খুলবে — যেটা মনে ধরবে, পিন করে রেখে দাও।</p>
+          </div>
+          <span class="header-rule" aria-hidden="true"></span>
+        </header>
+
+        <div class="library-workspace">
+          <div class="filter-dock quote-toolbar">
+            <div class="tabs" id="quoteFilters"></div>
+          </div>
+          <div class="book-shelves" id="quoteList"></div>
+        </div>
+      </div>
     </section>
 
     <!-- ৫. খবর -->
     <section class="page" id="page-news">
-      <div class="ph"><h1>আজকের খবর, সংক্ষেপে</h1><p id="newsUpdated">খবর লোড হচ্ছে…</p></div>
-      <div class="src" id="newsSrc"></div>
-      <div class="tabs" id="newsTabs"></div>
-      <div id="newsContent">
-        <div class="card"><div class="skel-row"></div><div class="skel-row"></div><div class="skel-row"></div></div>
+      <div class="page-frame">
+        <header class="ph page-header news-masthead">
+          <span class="page-emblem emblem-indigo" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-news"/></svg>
+          </span>
+          <div class="page-heading">
+            <h1>আজকের খবর, সংক্ষেপে</h1>
+            <p id="newsUpdated">খবর লোড হচ্ছে…</p>
+          </div>
+          <div class="news-source-meta">
+            <div class="src" id="newsSrc"></div>
+          </div>
+        </header>
+
+        <div class="news-workspace">
+          <div class="filter-dock news-toolbar">
+            <div class="tabs" id="newsTabs"></div>
+          </div>
+          <div class="news-feed" id="newsContent">
+            <div class="card glass-card">
+              <div class="skel-row"></div>
+              <div class="skel-row"></div>
+              <div class="skel-row"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ৬. বিস্ময় (আশ্চর্য তথ্য) -->
     <section class="page" id="page-facts">
-      <div class="ph"><h1>আজকের ১০টি বিস্ময়</h1><p>প্রতিদিন নতুন দশটি অবাক করা তথ্য। যেটা ভালো লাগবে, পিন করে রেখে দাও।</p></div>
-      <div class="facts" id="factList"></div>
+      <div class="page-frame">
+        <header class="ph page-header facts-header">
+          <span class="page-emblem emblem-gold" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-spark"/></svg>
+          </span>
+          <div class="page-heading">
+            <h1>আজকের ১০টি বিস্ময়</h1>
+            <p>প্রতিদিন নতুন দশটি অবাক করা তথ্য। যেটা ভালো লাগবে, পিন করে রেখে দাও।</p>
+          </div>
+          <span class="header-rule" aria-hidden="true"></span>
+        </header>
+
+        <div class="discovery-canvas">
+          <div class="facts fact-grid" id="factList"></div>
+        </div>
+      </div>
     </section>
 
     <!-- ৭. উন্নতি -->
     <section class="page" id="page-growth">
-      <div class="ph"><h1>আজ এগিয়ে যাওয়ার ১০টি ধাপ</h1><p>জীবনটা ধীরে ধীরে ভালো করার ছোট ছোট অভ্যাস — আজকের ১০টি আইডিয়া আর সময় ধরে সাজানো রুটিন।</p></div>
-      <div class="g-g">
-        <div>
-          <div id="tipList" class="tip-stack"></div>
-          <div class="ph" style="margin-top:28px"><h1 style="font-size:24px">আজকের রুটিন</h1><p>কোথায় কতটা সময় দেবে, সাজানো আছে।</p></div>
-          <div id="routineGrowth"></div>
-        </div>
-        <aside class="score">
-          <div class="card tint t-mint">
-            <div class="h2" style="text-align:center">আজকের দিনের অগ্রগতি</div>
-            <div class="ring"><svg viewBox="0 0 150 150"><circle class="bg" cx="75" cy="75" r="62"/><circle id="ringFg" class="fg" cx="75" cy="75" r="62" stroke-dasharray="389.6" stroke-dashoffset="389.6"/></svg><div><b id="ringPct">০%</b><span>দিন পার হয়েছে</span></div></div>
-            <p class="muted" style="font-size:14px;text-align:center;color:#0f6b55">সকাল ৬টা থেকে রাত ১১টা — এই সময়ের হিসাবে</p>
+      <div class="page-frame">
+        <header class="ph page-header growth-header">
+          <span class="page-emblem emblem-mint" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-up"/></svg>
+          </span>
+          <div class="page-heading">
+            <h1>আজ এগিয়ে যাওয়ার ১০টি ধাপ</h1>
+            <p>জীবনটা ধীরে ধীরে ভালো করার ছোট ছোট অভ্যাস — আজকের ১০টি আইডিয়া আর সময় ধরে সাজানো রুটিন।</p>
           </div>
-          <div class="card timer">
-            <div class="h2" style="margin-bottom:6px">ফোকাস টাইমার</div>
-            <div class="modes"><button class="on" data-tmode="focus">ফোকাস ২৫</button><button data-tmode="break">বিরতি ৫</button></div>
+          <span class="header-rule" aria-hidden="true"></span>
+        </header>
+
+        <aside class="score growth-console">
+          <div class="card tint t-mint day-progress-card">
+            <h2 class="h2">আজকের দিনের অগ্রগতি</h2>
+            <div class="ring">
+              <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false">
+                <circle class="bg" cx="75" cy="75" r="62"/>
+                <circle id="ringFg" class="fg" cx="75" cy="75" r="62" stroke-dasharray="389.6" stroke-dashoffset="389.6"/>
+              </svg>
+              <div class="ring-label">
+                <b id="ringPct">০%</b>
+                <span>দিন পার হয়েছে</span>
+              </div>
+            </div>
+            <p class="muted day-progress-note">সকাল ৬টা থেকে রাত ১১টা — এই সময়ের হিসাবে</p>
+          </div>
+
+          <div class="card glass-card timer focus-card">
+            <h2 class="h2">ফোকাস টাইমার</h2>
+            <div class="modes segmented-control">
+              <button type="button" class="on" data-tmode="focus">ফোকাস ২৫</button>
+              <button type="button" data-tmode="break">বিরতি ৫</button>
+            </div>
             <div class="tm" id="tm" aria-live="off">২৫:০০</div>
-            <div class="row"><button class="btn indigo" id="tmToggle">শুরু করুন</button><button class="btn soft" id="tmReset">আবার</button></div>
+            <div class="row timer-actions">
+              <button class="btn indigo" type="button" id="tmToggle">শুরু করুন</button>
+              <button class="btn soft" type="button" id="tmReset">আবার</button>
+            </div>
             <p class="focus-n" id="focusNote">আজ ০টি ফোকাস সেশন শেষ</p>
           </div>
-          <div class="card">
-            <div class="h2">এই সপ্তাহ</div>
+
+          <div class="card glass-card week-card">
+            <h2 class="h2">এই সপ্তাহ</h2>
             <div class="wk" id="weekBars"></div>
-            <p class="muted" style="font-size:13.5px;margin-top:8px">গত ৭ দিনের আবেদনের হিসাব</p>
+            <p class="muted week-note">গত ৭ দিনের আবেদনের হিসাব</p>
           </div>
         </aside>
+
+        <div class="growth-columns">
+          <div class="growth-ideas">
+            <div class="tip-stack" id="tipList"></div>
+          </div>
+          <div class="growth-routine">
+            <header class="ph section-heading">
+              <div class="page-heading">
+                <h2>আজকের রুটিন</h2>
+                <p>কোথায় কতটা সময় দেবে, সাজানো আছে।</p>
+              </div>
+              <span class="header-rule" aria-hidden="true"></span>
+            </header>
+            <div class="routine-board" id="routineGrowth"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ৮. পিন করা -->
     <section class="page" id="page-pins">
-      <div class="ph"><h1>পিন করা</h1><p>যা ভালো লেগেছে পিন করে রেখেছো — প্রতিদিনের সেট বদলে গেলেও এগুলো থেকে যাবে।</p></div>
-      <div id="pinGroups"></div>
+      <div class="page-frame">
+        <header class="ph page-header pins-header">
+          <span class="page-emblem emblem-rose" aria-hidden="true">
+            <svg class="ico" focusable="false"><use href="#i-pin"/></svg>
+          </span>
+          <div class="page-heading">
+            <h1>পিন করা</h1>
+            <p>যা ভালো লেগেছে পিন করে রেখেছো — প্রতিদিনের সেট বদলে গেলেও এগুলো থেকে যাবে।</p>
+          </div>
+          <span class="header-rule" aria-hidden="true"></span>
+        </header>
+
+        <div class="collection-workspace">
+          <div class="pin-collection" id="pinGroups"></div>
+        </div>
+      </div>
     </section>
   </main>
 </div>
