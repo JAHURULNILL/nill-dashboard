@@ -6751,3 +6751,5 @@ select:focus-visible,
   .jobs-board{grid-template-columns:1fr}
   .nav-count{display:none}
 }
+
+.side-foot{display:block}
