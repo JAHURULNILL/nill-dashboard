@@ -1,6 +1,96 @@
 {
   "jobs": [
     {
+      "title": "Showroom / Outlet Sales Executive - (For International Homeware)",
+      "company": "Bdjobs.com",
+      "channel": "LinkedIn",
+      "date": "2026-10-26",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4481082349/",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Relations Executive for a Reputed EV Brand Showroom",
+      "company": "Skill Jobs",
+      "channel": "LinkedIn",
+      "date": "2026-10-26",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4482906858/",
+      "status": "applied"
+    },
+    {
+      "title": "Officer- Customer Experience Management",
+      "company": "Walton Hi-tech industries Plc",
+      "channel": "nextjobz",
+      "date": "2026-10-26",
+      "deadline": "2026-11-16",
+      "link": "https://nextjobz.com.bd/jobs/officer-customer-experience-management-dhaka-IJOB202676379",
+      "status": "applied"
+    },
+    {
+      "title": "Jr. Executive/Executive - Corporate Sales (Metro Mart)",
+      "company": "Akij Venture Ltd.",
+      "channel": "nextjobz",
+      "date": "2026-10-26",
+      "deadline": "2026-11-19",
+      "link": "https://nextjobz.com.bd/jobs/jr-executiveexecutive-corporate-sales-metro-mart-dhaka-IJOB202677249",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Executive",
+      "company": "Ghorer Bazar",
+      "channel": "nextjobz",
+      "date": "2026-10-26",
+      "deadline": "2026-11-25",
+      "link": "https://nextjobz.com.bd/jobs/sales-executive-dhaka-IJOB202677947",
+      "status": "applied"
+    },
+    {
+      "title": "Tele-Counselling Executive (Telesales)",
+      "company": "MZ Media",
+      "channel": "Bdjobs",
+      "date": "2026-10-26",
+      "deadline": "2026-11-24",
+      "link": "https://bdjobs.com/h/details/1548601?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Call Center / Customer Support Executive",
+      "company": "TEACHBLOOM",
+      "channel": "Bdjobs",
+      "date": "2026-10-26",
+      "deadline": "2026-11-24",
+      "link": "https://bdjobs.com/h/details/1548512?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Communication Officer",
+      "company": "LONGQUAN HARDWARE CO. LTD",
+      "channel": "Bdjobs",
+      "date": "2026-10-26",
+      "deadline": "2026-10-31",
+      "link": "https://bdjobs.com/h/details/1547641?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Tele Sales Executive",
+      "company": "POSITIVE BAZAR",
+      "channel": "Shomvob",
+      "date": "2026-10-26",
+      "deadline": "2026-11-19",
+      "link": "https://app.shomvob.co/single-job-description/?id=26582",
+      "status": "applied"
+    },
+    {
+      "title": "Call Center Executive",
+      "company": "A reputed company",
+      "channel": "Shomvob",
+      "date": "2026-10-26",
+      "deadline": "2026-11-15",
+      "link": "https://app.shomvob.co/single-job-description/?id=26658",
+      "status": "applied"
+    },
+    {
       "title": "Mobile accessories",
       "company": "SIGA trade international",
       "channel": "LinkedIn",
@@ -1415,8 +1505,8 @@
     }
   ],
   "counters": {
-    "nextjobz_oct": 55,
-    "shomvob_applied": 66,
-    "bdjobs_quota": "32/75"
+    "nextjobz_oct": 58,
+    "shomvob_applied": 67,
+    "bdjobs_quota": "37/75"
   }
 }
