@@ -1,6 +1,150 @@
 {
   "jobs": [
     {
+      "title": "Customer Service Agent",
+      "company": "Priti Research and consultancy LTD.",
+      "channel": "LinkedIn",
+      "date": "2026-10-27",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4483277417/",
+      "status": "applied"
+    },
+    {
+      "title": "Retail & Customer Service Executive",
+      "company": "Nutrition Depot",
+      "channel": "LinkedIn",
+      "date": "2026-10-27",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4480952468/",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Representative (Online/Offline)",
+      "company": "Arenco Bangladesh",
+      "channel": "LinkedIn",
+      "date": "2026-10-27",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4483552530/",
+      "status": "applied"
+    },
+    {
+      "title": "Telesales Executive",
+      "company": "Urban Academy",
+      "channel": "nextjobz",
+      "date": "2026-10-27",
+      "deadline": "2026-11-30",
+      "link": "https://nextjobz.com.bd/jobs/telesales-executive-dhaka-IJOB202678486",
+      "status": "applied"
+    },
+    {
+      "title": "SALES REPRESENTATIVE (ONLINE/OFFLINE)",
+      "company": "Arenco Bangladesh",
+      "channel": "nextjobz",
+      "date": "2026-10-27",
+      "deadline": "2026-10-31",
+      "link": "https://nextjobz.com.bd/jobs/sales-representative-onlineoffline-dhaka-IJOB202678214",
+      "status": "applied"
+    },
+    {
+      "title": "Business Development Officer - Auto Loan (Third Party Employment)",
+      "company": "IPDC Finance PLC",
+      "channel": "nextjobz",
+      "date": "2026-10-27",
+      "deadline": "2026-11-06",
+      "link": "https://nextjobz.com.bd/jobs/business-development-officer-auto-loan-third-party-employment-dhaka-IJOB202672827",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Executive",
+      "company": "Fashion Group.",
+      "channel": "nextjobz",
+      "date": "2026-10-27",
+      "deadline": "2026-11-25",
+      "link": "https://nextjobz.com.bd/jobs/sales-executive-dhaka-IJOB202678060",
+      "status": "applied"
+    },
+    {
+      "title": "Call Center Executive",
+      "company": "Prefine",
+      "channel": "Bdjobs",
+      "date": "2026-10-27",
+      "deadline": "2026-11-15",
+      "link": "https://bdjobs.com/h/details/1549513?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Sales And Customer Care Executive",
+      "company": "Jmart Bazar",
+      "channel": "Bdjobs",
+      "date": "2026-10-27",
+      "deadline": "2026-10-30",
+      "link": "https://bdjobs.com/h/details/1548489?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Service, Marketing Executive",
+      "company": "Kuaile Global Trading",
+      "channel": "Shomvob",
+      "date": "2026-10-27",
+      "deadline": "2026-11-03",
+      "link": "https://app.shomvob.co/single-job-description/?id=26703",
+      "status": "applied"
+    },
+    {
+      "title": "Jr. Customer Service Executive",
+      "company": "Caretutors Technologies Limited",
+      "channel": "Shomvob",
+      "date": "2026-10-27",
+      "deadline": "2026-11-19",
+      "link": "https://app.shomvob.co/single-job-description/?id=26505",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Support Officer (Fresher)",
+      "company": "MY Outsourcing Ltd.",
+      "channel": "Shomvob",
+      "date": "2026-10-27",
+      "deadline": "2026-11-25",
+      "link": "https://app.shomvob.co/single-job-description/?id=26683",
+      "status": "applied"
+    },
+    {
+      "title": "Office Assistant",
+      "company": "BD Engineer Works",
+      "channel": "Shomvob",
+      "date": "2026-10-27",
+      "deadline": "2026-11-24",
+      "link": "https://app.shomvob.co/single-job-description/?id=26699",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Support Executive",
+      "company": "Dinebd",
+      "channel": "Facebook",
+      "date": "2026-10-27",
+      "deadline": "2026-10-31",
+      "link": "https://www.facebook.com/groups/careeropportunity2025/posts/2585310671943399",
+      "status": "applied"
+    },
+    {
+      "title": "Sales & Marketing Executive",
+      "company": "Resort Bazar",
+      "channel": "Facebook",
+      "date": "2026-10-27",
+      "deadline": null,
+      "link": "https://www.facebook.com/groups/careeropportunity2025/posts/2585525798588553/",
+      "status": "applied"
+    },
+    {
+      "title": "Outlet Supervisor",
+      "company": "Krishibid Bazaar",
+      "channel": "Facebook",
+      "date": "2026-10-27",
+      "deadline": null,
+      "link": "https://www.facebook.com/groups/275979177708748/posts/1483267190313268",
+      "status": "applied"
+    },
+    {
       "title": "Junior Executive (Billing Section) – Contractual",
       "company": "Apple Gadgets",
       "channel": "Facebook",
@@ -1523,8 +1667,8 @@
     }
   ],
   "counters": {
-    "nextjobz_oct": 58,
-    "shomvob_applied": 67,
-    "bdjobs_quota": "37/75"
+    "nextjobz_oct": 62,
+    "shomvob_applied": 71,
+    "bdjobs_quota": "39/75"
   }
 }
