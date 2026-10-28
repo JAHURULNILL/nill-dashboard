@@ -2,6 +2,123 @@
   "jobs": [
     {
       "title": "Customer Service Agent",
+      "company": "HFM",
+      "channel": "LinkedIn",
+      "date": "2026-10-28",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4483655849/",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Operations Executive",
+      "company": "nextjobz (for The Odyssey BD)",
+      "channel": "LinkedIn",
+      "date": "2026-10-28",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4477155011/",
+      "status": "applied"
+    },
+    {
+      "title": "Telesales Executive",
+      "company": "Urban Academy BD",
+      "channel": "LinkedIn",
+      "date": "2026-10-28",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4484009022/",
+      "status": "applied"
+    },
+    {
+      "title": "Jr. Executive - Call Center (Tele-sales)",
+      "company": "RensSoft Solutions Limited",
+      "channel": "nextjobz",
+      "date": "2026-10-28",
+      "deadline": "2026-11-25",
+      "link": "https://nextjobz.com.bd/jobs/jr-executive-call-center-tele-sales-dhaka-mohammadpur-IJOB202677683",
+      "status": "applied"
+    },
+    {
+      "title": "Telesales & Customer Support Executive (Night & Day Shift)",
+      "company": "Falaq Food",
+      "channel": "nextjobz",
+      "date": "2026-10-28",
+      "deadline": "2026-11-26",
+      "link": "https://nextjobz.com.bd/jobs/telesales-customer-support-executive-night-day-shift-dhaka-mohammadpur-IJOB202678300",
+      "status": "applied"
+    },
+    {
+      "title": "Call Centre Executive (Telesales)",
+      "company": "LA'AM Ltd.",
+      "channel": "nextjobz",
+      "date": "2026-10-28",
+      "deadline": "2026-11-27",
+      "link": "https://nextjobz.com.bd/jobs/call-centre-executive-telesales-dhaka-mirpur-IJOB202678576",
+      "status": "applied"
+    },
+    {
+      "title": "CRM & Sales Executive",
+      "company": "Interior squad Bd",
+      "channel": "Bdjobs",
+      "date": "2026-10-28",
+      "deadline": "2026-11-06",
+      "link": "https://bdjobs.com/h/details/1549699?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Call Centre Executive (Telesales)",
+      "company": "LA'AM Ltd.",
+      "channel": "Bdjobs",
+      "date": "2026-10-28",
+      "deadline": "2026-11-24",
+      "link": "https://bdjobs.com/h/details/1548606?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Associate (contractual)",
+      "company": "A reputed company",
+      "channel": "Shomvob",
+      "date": "2026-10-28",
+      "deadline": "2026-11-28",
+      "link": "https://app.shomvob.co/single-job-description/?id=26728",
+      "status": "applied"
+    },
+    {
+      "title": "Store Keeper cum Sales Executive",
+      "company": "MARS FASHION",
+      "channel": "Shomvob",
+      "date": "2026-10-28",
+      "deadline": "2026-11-24",
+      "link": "https://app.shomvob.co/single-job-description/?id=26694",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Executive",
+      "company": "Urban Galaxy",
+      "channel": "Shomvob",
+      "date": "2026-10-28",
+      "deadline": "2026-11-20",
+      "link": "https://app.shomvob.co/single-job-description/?id=26713",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Service Associate",
+      "company": "Genuity Systems (BPO)",
+      "channel": "Email",
+      "date": "2026-10-28",
+      "deadline": null,
+      "link": "https://www.facebook.com/groups/careeropportunity2025/posts/2586641498476983",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Support Executive (E-commerce)",
+      "company": "Prime Essential Store",
+      "channel": "Email",
+      "date": "2026-10-28",
+      "deadline": "2026-10-30",
+      "link": "https://bdjobs.com/h/details/1548073?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Service Agent",
       "company": "Priti Research and consultancy LTD.",
       "channel": "LinkedIn",
       "date": "2026-10-27",
@@ -1667,8 +1784,8 @@
     }
   ],
   "counters": {
-    "nextjobz_oct": 62,
-    "shomvob_applied": 71,
-    "bdjobs_quota": "39/75"
+    "nextjobz_oct": 65,
+    "shomvob_applied": 73,
+    "bdjobs_quota": "41/75"
   }
 }
