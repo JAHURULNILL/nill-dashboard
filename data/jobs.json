@@ -1736,6 +1736,150 @@
       "deadline": null,
       "link": "https://www.linkedin.com/jobs/view/4482654858/",
       "status": "applied"
+    },
+    {
+      "title": "Supply Chain Associate",
+      "company": "Eon Foods Limited",
+      "channel": "LinkedIn",
+      "date": "2026-10-29",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4480976281/",
+      "status": "applied"
+    },
+    {
+      "title": "Business Development Executive",
+      "company": "Bangladesh Software Solution",
+      "channel": "LinkedIn",
+      "date": "2026-10-29",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4484078425/",
+      "status": "applied"
+    },
+    {
+      "title": "Sles and customer experience",
+      "company": "Shahin E mart",
+      "channel": "LinkedIn",
+      "date": "2026-10-29",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4483647206/",
+      "status": "applied"
+    },
+    {
+      "title": "Brand Promoter",
+      "company": "BMC Group",
+      "channel": "LinkedIn",
+      "date": "2026-10-29",
+      "deadline": null,
+      "link": "https://www.linkedin.com/jobs/view/4483359888/",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Service Officer",
+      "company": "Genex Infosys PLC.",
+      "channel": "nextjobz",
+      "date": "2026-10-29",
+      "deadline": "2026-11-27",
+      "link": "https://nextjobz.com.bd/jobs/customer-service-officer-dhaka-khilkhet-IJOB202678695",
+      "status": "applied"
+    },
+    {
+      "title": "Executive/ Senior Executive, Contact Center, Marketing",
+      "company": "Edison Real Estate Limited",
+      "channel": "nextjobz",
+      "date": "2026-10-29",
+      "deadline": "2026-11-07",
+      "link": "https://nextjobz.com.bd/jobs/executive-senior-executive-contact-center-marketing-dhaka-tejgaon-IJOB202673858",
+      "status": "applied"
+    },
+    {
+      "title": "Receptionist - HR & Admin",
+      "company": "MEP Group",
+      "channel": "nextjobz",
+      "date": "2026-10-29",
+      "deadline": "2026-11-19",
+      "link": "https://nextjobz.com.bd/jobs/receptionist-hr-admin-dhaka-baridhara-j-block-IJOB202677054",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Relationship Officer (CRO)",
+      "company": "Minister Hi-Tech Park Ltd.",
+      "channel": "nextjobz",
+      "date": "2026-10-29",
+      "deadline": "2026-11-28",
+      "link": "https://nextjobz.com.bd/jobs/customer-relationship-officer-cro-dhaka-gulshan-1-IJOB202678971",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Service Officer",
+      "company": "Genex Infosys PLC.",
+      "channel": "Bdjobs",
+      "date": "2026-10-29",
+      "deadline": "2026-11-26",
+      "link": "https://bdjobs.com/h/details/1549417?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Customer Service & Telemarketing Executive",
+      "company": "Pendulum Motion",
+      "channel": "Bdjobs",
+      "date": "2026-10-29",
+      "deadline": "2026-11-15",
+      "link": "https://bdjobs.com/h/details/1550179?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Representative",
+      "company": "Rongdhanu Group",
+      "channel": "Bdjobs",
+      "date": "2026-10-29",
+      "deadline": "2026-10-31",
+      "link": "https://bdjobs.com/h/details/1544120?ln=1",
+      "status": "applied"
+    },
+    {
+      "title": "Data Entry Operator",
+      "company": "IFixFast",
+      "channel": "Shomvob",
+      "date": "2026-10-29",
+      "deadline": "2026-11-25",
+      "link": "https://app.shomvob.co/single-job-description/?id=26758",
+      "status": "applied"
+    },
+    {
+      "title": "Marketing Sales Officer (Remote)",
+      "company": "Skillroom Bangladesh IT",
+      "channel": "Shomvob",
+      "date": "2026-10-29",
+      "deadline": "2026-11-04",
+      "link": "https://app.shomvob.co/single-job-description/?id=26171",
+      "status": "applied"
+    },
+    {
+      "title": "Sales Executive",
+      "company": "Sprint Networks",
+      "channel": "Shomvob",
+      "date": "2026-10-29",
+      "deadline": "2026-11-20",
+      "link": "https://app.shomvob.co/single-job-description/?id=26742",
+      "status": "applied"
+    },
+    {
+      "title": "Computer Operator (Account Opening Campaign)",
+      "company": "A reputed company",
+      "channel": "Shomvob",
+      "date": "2026-10-29",
+      "deadline": "2026-11-25",
+      "link": "https://app.shomvob.co/single-job-description/?id=26741",
+      "status": "applied"
+    },
+    {
+      "title": "Incharge / Assistant Incharge",
+      "company": "Khaas Food",
+      "channel": "Email",
+      "date": "2026-10-29",
+      "deadline": null,
+      "link": "https://www.facebook.com/photo/?fbid=3314699978918355&set=gm.1484843893488931&idorvanity=275979177708748",
+      "status": "applied"
     }
   ],
   "shortlist": [
@@ -1784,8 +1928,8 @@
     }
   ],
   "counters": {
-    "nextjobz_oct": 65,
-    "shomvob_applied": 73,
-    "bdjobs_quota": "41/75"
+    "nextjobz_oct": 69,
+    "shomvob_applied": 77,
+    "bdjobs_quota": "45/75"
   }
 }
