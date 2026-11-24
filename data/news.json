@@ -1,12 +1,47 @@
 {
- "updated": "2026-11-23T01:16:11.583895+00:00",
+ "updated": "2026-11-24T01:16:19.013059+00:00",
  "bangladesh": [
   {
    "source": "প্রথম আলো",
-   "title": "পচেত্তিনোর দুঃস্বপ্নের অভিষেক, ইউনাইটেডকে ৪-০ গোলে উড়িয়ে দিল লিভারপুল",
-   "summary": "ম্যানচেস্টার ইউনাইটেডের কোচ হিসেবে অভিষেকে বড় হারের স্বাদ পেয়েছেন মরিসিও পচেত্তিনো। লিভারপুল নিজেদের মাঠে জিতেছে ৪–০ গোলে।",
-   "link": "https://www.prothomalo.com/sports/football/dzqtvo5nom",
-   "published": "2026-11-22T18:32:32+00:00"
+   "title": "ইরানে হামলা নিয়ে নেতানিয়াহুর তোড়জোড় কিসের ইঙ্গিত, আইজেনকট কি বড় ঝামেলায় পড়ছেন",
+   "summary": "ইরানে নতুন করে হামলার পক্ষে যুক্তি তুলে ধরতে গিয়ে নেতানিয়াহু যুক্তরাষ্ট্রের প্রেসিডেন্ট ডোনাল্ড ট্রাম্পের সঙ্গে কথা বলেছেন।",
+   "link": "https://www.prothomalo.com/world/middle-east/qyydp9n329",
+   "published": "2026-11-24T00:00:00+00:00"
+  },
+  {
+   "source": "BBC বাংলা",
+   "title": "পোশাক শ্রমিকদের ন্যূনতম মজুরি নিয়ে ঠিক কী হচ্ছে?",
+   "summary": "পোশাক শ্রমিকদের ন্যূনতম মজুরি কত দেওয়া হবে, মজুরি বোর্ডের সভায় সেই প্রস্তাব দিয়েছে মালিকপক্ষ। তবে, মালিকপক্ষ কত টাকা মজুরি প্রস্তাব করেছে সেই তথ্য এখনি…",
+   "link": "https://www.bbc.com/bengali/articles/cmqlq2e7z1lqo?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-23T15:40:39+00:00"
+  },
+  {
+   "source": "BBC বাংলা",
+   "title": "২০৩৫ সালে মুসলিমরা হবেন বিশ্বের সবচেয়ে বড় ধর্মীয় গোষ্ঠী, বাংলাদেশ কোন অবস্থানে",
+   "summary": "বহু শতাব্দী ধরে ধর্মীয় দিক দিয়ে বিশ্বের বৃহত্তম জনগোষ্ঠীগত খ্রিষ্টান। আর এর পরেই রয়েছে মুসলিম জনগোষ্ঠীর অবস্থান। তবে এই সংখ্যাতত্ত্বে পরিবর্তন আসতে পারে ২০৩৫…",
+   "link": "https://www.bbc.com/bengali/articles/c6vg2991450xo?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-23T08:23:34+00:00"
+  },
+  {
+   "source": "BBC বাংলা",
+   "title": "চুক্তিতে পৌঁছাতে ব্যর্থ হলো জাতিসংঘ জলবায়ু সম্মেলন",
+   "summary": "দুই সপ্তাহের আলোচনা শেষে অচলাবস্থা কাটানোর চেষ্টায় রোববার ভোরে ক্লান্ত প্রতিনিধিদের সামনে চুক্তির একটি নতুন খসড়া উপস্থাপন করা হয়েছিল। কিন্তু ওই নথিতে কোথাও…",
+   "link": "https://www.bbc.com/bengali/articles/c5n4egxkrjjwo?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-23T05:09:38+00:00"
+  },
+  {
+   "source": "BBC বাংলা",
+   "title": "পত্রিকা: 'রাজপথ নিয়ন্ত্রণে ঐক্য চায় বিএনপি, নানা শর্ত বিরোধীদের'",
+   "summary": "আজ সোমবার ঢাকা থেকে প্রকাশিত পত্রিকার পাতায় গুরুত্ব পেয়েছে আওয়ামী লীগের বিরুদ্ধে বিএনপির রাজনৈতিক ঐক্য তৈরির চেষ্টা ও সংলাপের খবর। এছাড়া গার্মেন্টস শিল্পের…",
+   "link": "https://www.bbc.com/bengali/articles/ck5y1exn93qqo?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-23T03:09:51+00:00"
+  },
+  {
+   "source": "BBC বাংলা",
+   "title": "দেশের বাজারে কমছে স্বর্ণের দাম, আরো কমবে নাকি বাড়বে?",
+   "summary": "চলতি বছরের শুরুতেই স্বর্ণের ভরি প্রায় তিন লাখ টাকা ছুঁইছুঁই ছিল, যা ইতিহাসের সর্বোচ্চ দাম। অন্যদিকে, বছরের শেষের দিকে এসে অক্টোবরের মাঝামাঝি থেকে নভেম্বরের…",
+   "link": "https://www.bbc.com/bengali/articles/cm1j6x28nzg1o?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-23T01:58:59+00:00"
   },
   {
    "source": "BBC বাংলা",
@@ -21,157 +56,138 @@
    "summary": "২০২৪ সালে ক্ষমতাচ্যুত হওয়া প্রধানমন্ত্রী শেখ হাসিনার ডিসেম্বরে দেশে ফিরে আসার ঘোষণার পর থেকে গত প্রায় এক মাসেরও বেশি সময় ধরে ঢাকাসহ বিভিন্ন জায়গায় সহিংসতা…",
    "link": "https://www.bbc.com/bengali/articles/cj3vg909607ko?at_medium=RSS&at_campaign=rss",
    "published": "2026-11-22T13:18:05+00:00"
-  },
-  {
-   "source": "BBC বাংলা",
-   "title": "অল্পবয়সীদেরও স্ট্রোকের ঝুঁকি, যেসব উপসর্গ উপেক্ষা করা উচিত নয়",
-   "summary": "স্ট্রোক কেবল বয়স্কদেরই হয়, তরুণ বা অল্পবয়সীদের নয় - প্রচলিত এ ধারণাকে এখন আর চিকিৎসকেরা সঠিক মনে করেন না। নতুন গবেষণা আর পরিসংখ্যান বলছে, ১৫ থেকে ৪৯ বছর বয়সী…",
-   "link": "https://www.bbc.com/bengali/articles/cmvgxxq4pzzxo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-22T06:15:54+00:00"
-  },
-  {
-   "source": "BBC বাংলা",
-   "title": "যুক্তরাষ্ট্রে 'মাদকের ঢল নামানো' মেক্সিকোর 'মাদক সম্রাট' যেভাবে আটক হলো",
-   "summary": "মেসা ফ্লোরেসের বিরুদ্ধে মেক্সিকোতে সংঘবদ্ধ অপরাধের অভিযোগে মামলা রয়েছে। অন্যদিকে এফবিআইয়ের অভিযোগ, তিনি 'যুক্তরাষ্ট্রে ফেন্টানিল, কোকেন, হেরোইন ও অন্যান্য…",
-   "link": "https://www.bbc.com/bengali/articles/ck987gp5g8jlo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-22T03:45:15+00:00"
-  },
-  {
-   "source": "BBC বাংলা",
-   "title": "পত্রিকা: 'দেশি-বিদেশি চাপে পোশাক খাত, রপ্তানি ও দাম কমছে'",
-   "summary": "আজ রোববার ২২শে নভেম্বর ঢাকা থেকে প্রকাশিত পত্রিকার খবরে গুরুত্ব পেয়েছে দেশের বিভিন্ন এলাকায় আওয়ামী লীগ নেতাকর্মীর সাথে বিএনপির সংঘর্ষের খবর। আট জেলায় ৯০…",
-   "link": "https://www.bbc.com/bengali/articles/c60qjn5583zyo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-22T03:11:01+00:00"
-  },
-  {
-   "source": "BBC বাংলা",
-   "title": "বাথরুমে গোপন বৈঠক, কেজিবি, এমআই-৬ ও ইসলামি প্রজাতন্ত্রের মাঝে আটকে পড়া এক গুপ্তচর",
-   "summary": "রেডউড বইটি ইরানে রুশ গোয়েন্দা সংস্থা কেজিবির কর্মকর্তা ভ্লাদিমির কোজিচকিনের সাথে ব্রিটিশ গুপ্তচর সংস্থা এমআই৬-এর গোপন সহযোগিতা, সোভিয়েত ইউনিয়ন এবং তুদেহ…",
-   "link": "https://www.bbc.com/bengali/articles/cqp8g3yej67lo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-22T01:39:55+00:00"
-  },
-  {
-   "source": "BBC বাংলা",
-   "title": "নড়াইলের কালিয়ার বাড়িঘরে আগুনের ভিডিও, কী জানা যাচ্ছে",
-   "summary": "বাংলাদেশের নড়াইল জেলার কালিয়া উপজেলার কয়েকটি গ্রামের অনেক বাড়িঘরে আগুন দাবি করে বেশ কিছু ভিডিও সামাজিক মাধ্যমে ব্যাপকভাবে ছড়িয়ে পড়েছে। স্থানীয় আওয়ামী লীগ…",
-   "link": "https://www.bbc.com/bengali/articles/c3pw4z24p9j1o?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-21T12:26:31+00:00"
   }
  ],
  "tech": [
   {
    "source": "The Verge",
-   "title": "We haven’t seen the last of the major tech outages",
-   "summary": "Over the last week or so, we have seen a nationwide FAA ground stop, a multi-day Outlook outage that brought entire companies to a standstill, and a banking…",
-   "link": "https://www.theverge.com/tech/1039851/major-tech-outages",
-   "published": "2026-11-22T17:48:02-05:00"
-  },
-  {
-   "source": "TechCrunch",
-   "title": "‘You Can See Everything’ has made more than $100M worldwide",
-   "summary": "The new Elizabeth Holmes documentary is just beginning to roll out internationally.",
-   "link": "https://techcrunch.com/2026/11/22/you-can-see-everything-has-made-more-than-100m-worldwide/",
-   "published": "2026-11-22T21:42:48+00:00"
-  },
-  {
-   "source": "TechCrunch",
-   "title": "OpenAI’s chief scientist has thoughts on how to limit AI development",
-   "summary": "To establish a speed limit on AI development, you need to agree on how to measure speed.",
-   "link": "https://techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development/",
-   "published": "2026-11-22T21:14:07+00:00"
-  },
-  {
-   "source": "TechCrunch",
-   "title": "The best apps to make new friends right now",
-   "summary": "We've compiled a list of friendship apps, from friend discovery platforms like BFF to event-focused ones like Timeleft.",
-   "link": "https://techcrunch.com/2026/11/22/as-people-look-for-ways-to-make-new-friends-here-are-the-apps-promising-to-help/",
-   "published": "2026-11-22T21:00:00+00:00"
-  },
-  {
-   "source": "TechCrunch",
-   "title": "Why data centers are at the center of the Big Tech backlash",
-   "summary": "Journalist Paris Marx unpacks his new book \"Hyperscale.\"",
-   "link": "https://techcrunch.com/2026/11/22/why-data-centers-are-at-the-center-of-the-big-tech-backlash/",
-   "published": "2026-11-22T18:08:43+00:00"
+   "title": "Google alternative Kagi launches an email service",
+   "summary": "Kagi, which already offers a paid alternative to Google Search and its own Orion browser as a rival to Chrome, is taking on another Google service: Gmail.…",
+   "link": "https://www.theverge.com/tech/1041000/kagi-mail-email-google-gmail-alternative",
+   "published": "2026-11-23T19:02:52-05:00",
+   "title_bn": "গুগলের বিকল্প কাগি একটি ইমেল পরিষেবা চালু করেছে"
   },
   {
    "source": "The Verge",
-   "title": "Delta flights in and out of Atlanta delayed due to system outage",
-   "summary": "All Delta flights in and out of Atlanta are facing significant delays on Sunday due to a problem with the system that calculates a plane's weight and balance.…",
-   "link": "https://www.theverge.com/transportation/1039779/delta-flights-delayed-system-outage",
-   "published": "2026-11-22T12:46:44-05:00"
+   "title": "The hacker behind early GTA VI leaks has been sentenced — and released",
+   "summary": "Arion Kurtaj, who pleaded guilty last week to hacking Grand Theft Auto VI developer Rockstar Games and other companies, including Uber and Revolut, was…",
+   "link": "https://www.theverge.com/games/1040966/arion-kurtaj-gta-vi-leaks-sentenced-released",
+   "published": "2026-11-23T18:25:01-05:00",
+   "title_bn": "প্রারম্ভিক GTA VI ফাঁসের পিছনে হ্যাকারকে সাজা দেওয়া হয়েছে — এবং মুক্তি দেওয়া হয়েছে"
   },
   {
    "source": "The Verge",
-   "title": "Binding of Isaac developer removes AI music from Repentance Plus",
-   "summary": "The Binding of Isaac: Repentance Plus has spent the last few days getting review-bombed on Steam after it was discovered that a particular segment of the game…",
-   "link": "https://www.theverge.com/games/1039770/binding-of-isaac-ai-music",
-   "published": "2026-11-22T12:25:20-05:00"
+   "title": "The Verge’s 2026 holiday gift guide",
+   "summary": "Gift-giving isn't just about grabbing something solid under a determined spending limit. It's an expression of love, a way to show someone how well you really…",
+   "link": "https://www.theverge.com/gadgets/1026041/holiday-gift-guide-2026",
+   "published": "2026-11-23T18:14:10-05:00",
+   "title_bn": "দ্য ভার্জের 2026 হলিডে গিফট গাইড"
   },
   {
    "source": "TechCrunch",
-   "title": "TechCrunch Mobility: A/B testing robots vs. humans",
-   "summary": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and, now more than ever, the role AI is playing in it.",
-   "link": "https://techcrunch.com/2026/11/22/techcrunch-mobility-a-b-testing-robots-vs-humans/",
-   "published": "2026-11-22T17:06:00+00:00"
+   "title": "Figma employee sues, alleging company forced her to confront harassers",
+   "summary": "Figma and its CEO are being sued by a current employee for alleged sexual harassment and discrimination.",
+   "link": "https://techcrunch.com/2026/11/23/figma-employee-sues-alleging-company-forced-her-to-confront-harassers/",
+   "published": "2026-11-23T23:07:49+00:00",
+   "title_bn": "ফিগমার কর্মচারী মামলা করে, অভিযোগ করে যে কোম্পানি তাকে হয়রানিকারীদের মুখোমুখি হতে বাধ্য করেছে"
+  },
+  {
+   "source": "The Verge",
+   "title": "Ladybird, the first new browser engine in years, is now available to test",
+   "summary": "Ladybird, an independent web browser with a built-from-scratch engine, is finally available for testing. On Monday, Ladybird developer Andreas Kling announced…",
+   "link": "https://www.theverge.com/tech/1040872/ladybird-indie-browser-engine-alpha-testing",
+   "published": "2026-11-23T17:38:09-05:00",
+   "title_bn": "লেডিবার্ড, বছরের মধ্যে প্রথম নতুন ব্রাউজার ইঞ্জিন, এখন পরীক্ষা করার জন্য উপলব্ধ"
+  },
+  {
+   "source": "The Verge",
+   "title": "Trump engineered a risky comeback for Jensen Huang",
+   "summary": "After Nvidia's board accepted Jensen Huang's resignation as CEO, following reports that Huang had an affair with an alleged Chinese spy, President Donald…",
+   "link": "https://www.theverge.com/ai-artificial-intelligence/1040652/jensen-huang-nvidia-trump-reinstated",
+   "published": "2026-11-23T17:25:12-05:00",
+   "title_bn": "ট্রাম্প জেনসেন হুয়াংয়ের জন্য একটি ঝুঁকিপূর্ণ প্রত্যাবর্তন প্রকৌশলী করেছিলেন"
+  },
+  {
+   "source": "The Verge",
+   "title": "Nvidia CEO Jensen Huang is back. What happens next?",
+   "summary": "After the leather-jacketed CEO, president, and co-founder of Nvidia, Jensen Huang, acknowledged an affair with Megaspeed exec Alice Huang, his company…",
+   "link": "https://www.theverge.com/ai-artificial-intelligence/1030422/nvidia-jensen-huang-ai-china-alice-huang",
+   "published": "2026-11-23T17:10:32-05:00",
+   "title_bn": "এনভিডিয়ার সিইও জেনসেন হুয়াং ফিরে এসেছেন। এরপর কি হবে?"
+  },
+  {
+   "source": "The Verge",
+   "title": "Welcome to elite impunity, Jensen Huang",
+   "summary": "I suppose I must issue a hearty congratulations to Jensen Huang. Huang is CEO of Nvidia again, to the surprise of basically everyone except President Donald…",
+   "link": "https://www.theverge.com/ai-artificial-intelligence/1040819/welcome-to-elite-impunity-jensen-huang",
+   "published": "2026-11-23T17:09:26-05:00",
+   "title_bn": "অভিজাত দায়মুক্তিতে স্বাগতম, জেনসেন হুয়াং"
   }
  ],
  "world": [
   {
    "source": "BBC News",
-   "title": "Would you go on holiday with your ex's kids and their mum? How to make blended families work",
-   "summary": "Expert tips on how to get along with the mums and dads of your child's half-siblings.",
-   "link": "https://www.bbc.co.uk/news/articles/c617kj1j1x4jo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-23T01:09:04+00:00"
+   "title": "UK papers: 'Huang returns to Nvidia hotseat' and 'Burnham opens door to second referendum'",
+   "summary": "The reinstatement of Nvidia's chief executive Jensen Huang is a major focus of Tuesday's front pages.",
+   "link": "https://www.bbc.co.uk/news/articles/c69vwg0kxvy9o?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-24T01:08:32+00:00",
+   "title_bn": "যুক্তরাজ্যের কাগজপত্র: 'হুয়াং এনভিডিয়া হটসিটে ফিরে এসেছে' এবং 'বার্নহাম দ্বিতীয় গণভোটের দরজা খুলেছে'"
   },
   {
    "source": "BBC News",
-   "title": "Energy bills will soar - here's how you can ease the pain",
-   "summary": "Household energy bills are about to increase but there are ways to keep a lid on your expenditure.",
-   "link": "https://www.bbc.co.uk/news/articles/crm4rygl4m3o?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-23T01:05:07+00:00"
-  },
-  {
-   "source": "BBC News",
-   "title": "Australian music legend Molly Meldrum dies aged 83",
-   "summary": "The promoter and broadcaster helped define the music tastes of Australians for decades.",
-   "link": "https://www.bbc.co.uk/news/articles/c3qj57rkd2k1o?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-23T01:03:35+00:00"
-  },
-  {
-   "source": "BBC World",
-   "title": "COP31 fails to reach major climate deal as talks expose deep divisions",
-   "summary": "Hopes for an agreement on tackling climate change collapsed after a row about mentioning fossil fuels",
-   "link": "https://www.bbc.co.uk/news/articles/cqwy06zrd26lo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-23T00:50:35+00:00"
-  },
-  {
-   "source": "BBC News",
-   "title": "Can AI spot breast cancer earlier? NHS launches world's largest trial to find out",
-   "summary": "Researchers will test the technology in breast cancer screening which could ease pressure on the NHS.",
-   "link": "https://www.bbc.co.uk/news/articles/cmpdwnw3nvzjo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-23T00:49:22+00:00"
-  },
-  {
-   "source": "BBC News",
-   "title": "Will it snow this week? Mild Atlantic air collides with cold air across the UK",
-   "summary": "A battle ground is becoming established across the UK, milder air across the southwest and cold arctic air elsewhere",
-   "link": "https://www.bbc.co.uk/weather/articles/c5dj1l21w9pmo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-23T00:40:36+00:00"
+   "title": "Benefits review to suggest quicker payment for some disabled people",
+   "summary": "The Timms review will recommend those with severe conditions will not need to be reassessed to receive Pip.",
+   "link": "https://www.bbc.co.uk/news/articles/cvx2xjed2r3ro?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-24T00:53:31+00:00",
+   "title_bn": "কিছু প্রতিবন্ধী ব্যক্তিদের জন্য দ্রুত অর্থপ্রদানের পরামর্শ দেওয়ার জন্য বেনিফিট পর্যালোচনা"
   },
   {
    "source": "Al Jazeera",
-   "title": "WHO chief calls for peace amid heavy fighting in Ebola-hit DR Congo region",
-   "summary": "Fighting near a DRC hospital disrupts Ebola efforts, putting patients and workers at 'grave risk', WHO warns.",
-   "link": "https://www.aljazeera.com/news/2026/11/23/who-chief-calls-for-peace-amid-heavy-fighting-in-ebola-hit-dr-congo-region?traffic_source=rss",
-   "published": "2026-11-23T00:39:51+00:00"
+   "title": "US adds Megaspeed, firm at centre of Nvidia scandal, to export control list",
+   "summary": "Bureau of Security and Industry adds Singapore-based firm and six other entities to export control list.",
+   "link": "https://www.aljazeera.com/economy/2026/11/24/us-adds-megaspeed-firm-at-centre-of-nvidia-scandal-to-export-control-list?traffic_source=rss",
+   "published": "2026-11-24T00:52:47+00:00",
+   "title_bn": "মার্কিন যুক্তরাষ্ট্র এনভিডিয়া কেলেঙ্কারির কেন্দ্রবিন্দু মেগাস্পিডকে রপ্তানি নিয়ন্ত্রণ তালিকায় যুক্ত করেছে"
   },
   {
-   "source": "BBC World",
-   "title": "Italian jeweller and businessman Paolo Bulgari dies aged 89",
-   "summary": "In a statement to Italian media, his family remember him as \"the greatest jeweller of our time\".",
-   "link": "https://www.bbc.co.uk/news/articles/c8e39qk5vrpdo?at_medium=RSS&at_campaign=rss",
-   "published": "2026-11-23T00:33:36+00:00"
+   "source": "BBC News",
+   "title": "Chris Mason: Can Burnham turn volume down on EU debate?",
+   "summary": "The BBC's Chris Mason analyses what the EU conversation means for Labour and the PM.",
+   "link": "https://www.bbc.co.uk/news/articles/c6pw47jyyz5no?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-24T00:45:53+00:00",
+   "title_bn": "ক্রিস মেসন: বার্নহ্যাম কি ইইউ বিতর্কে ভলিউম কমিয়ে দিতে পারে?"
+  },
+  {
+   "source": "Al Jazeera",
+   "title": "What could Democrats do with their expanding congressional majority?",
+   "summary": "The Democratic Party is debating how best to use its large margin of victory in the US midterm elections.",
+   "link": "https://www.aljazeera.com/news/2026/11/24/what-could-democrats-do-with-their-expanding-congressional-majority?traffic_source=rss",
+   "published": "2026-11-24T00:39:22+00:00",
+   "title_bn": "ডেমোক্র্যাটরা তাদের ক্রমবর্ধমান কংগ্রেসীয় সংখ্যাগরিষ্ঠতা নিয়ে কী করতে পারে?"
+  },
+  {
+   "source": "Al Jazeera",
+   "title": "Turns out it wasn’t a lion afterall",
+   "summary": "The animal that sparked panic in Istanbul on Sunday because people thought it was a lion, was not a lion afterall.",
+   "link": "https://www.aljazeera.com/video/newsfeed/2026/11/24/turns-out-it-wasnt-a-lion-afterall?traffic_source=rss",
+   "published": "2026-11-24T00:35:58+00:00",
+   "title_bn": "দেখা যাচ্ছে এটি সিংহ ছিল না"
+  },
+  {
+   "source": "BBC News",
+   "title": "No 10 North will face greater scrutiny as Burnham's 10-year plan looms",
+   "summary": "The work of Number 10 North in Manchester has been kept largely away from the headlines since it opened in July.",
+   "link": "https://www.bbc.co.uk/news/articles/c6rrg7jx5gdgo?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-24T00:31:28+00:00",
+   "title_bn": "বার্নহ্যামের 10-বছরের পরিকল্পনা লম্বিত হওয়ায় নং 10 নর্থকে আরও বেশি তদন্তের মুখোমুখি হতে হবে"
+  },
+  {
+   "source": "BBC News",
+   "title": "Britain's landlords are getting bigger. A two-tier rental market may follow",
+   "summary": "Increasing numbers of corporate landlords could usher in big changes for renters",
+   "link": "https://www.bbc.co.uk/news/articles/c6n90g2l82d1o?at_medium=RSS&at_campaign=rss",
+   "published": "2026-11-24T00:28:48+00:00",
+   "title_bn": "ব্রিটেনের জমিদাররা বড় হচ্ছে। একটি দ্বি-স্তরের ভাড়া বাজার অনুসরণ করতে পারে"
   }
  ]
 }
